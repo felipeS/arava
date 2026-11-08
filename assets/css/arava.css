@@ -157,13 +157,12 @@ img { max-width: 100%; height: auto; display: block; }
 .site-header.is-scrolled { background: rgba(251, 248, 243, .96); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 .site-header .container { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 
-.ar-wordmark { display: inline-flex; flex-direction: column; align-items: flex-start; text-decoration: none; color: var(--ar-tierra); line-height: 1; padding-block: .25rem; }
-.ar-wordmark:hover { color: var(--ar-tierra); }
-.ar-wordmark__name { font-family: var(--ar-font-display); font-weight: 500; font-variation-settings: "SOFT" 0, "WONK" 0, "opsz" 72; font-size: 1.375rem; letter-spacing: -0.01em; }
-.ar-wordmark__rule { display: block; width: 100%; height: 1px; margin-top: 3px; background: var(--ar-arcilla); }
-@media (min-width: 992px) { .ar-wordmark__name { font-size: 1.625rem; } }
-.ar-on-dark .ar-wordmark, .ar-on-dark .ar-wordmark:hover { color: var(--ar-papel); }
-.ar-on-dark .ar-wordmark__rule { background: var(--ar-brasa); }
+/* Logo oficial de Aravá (SVG original, proporción 2,486:1). Nunca se deforma: alto fijo, ancho automático. */
+.ar-logo { display: inline-flex; align-items: center; flex: none; line-height: 0; padding-block: .25rem; }
+.ar-logo img { display: block; width: auto; height: 38px; max-width: none; }
+@media (min-width: 992px) { .ar-logo--header img { height: 48px; } }
+.ar-logo--footer img { height: 56px; }
+@media (min-width: 992px) { .ar-logo--footer img { height: 64px; } }
 
 .ar-nav-toggle { display: inline-flex; align-items: center; gap: .625rem; background: none; border: 0; padding: .625rem .25rem; color: var(--ar-tierra); font-size: var(--ar-fs-eyebrow); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; min-height: 44px; }
 .ar-nav-toggle__icon { position: relative; width: 16px; height: 8px; display: inline-block; }
