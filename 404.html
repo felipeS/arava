@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página no encontrada · Aravá</title>
+  <meta name="description" content="Esta página no existe. Vuelve al inicio del sitio de Aravá.">
+  <meta name="robots" content="noindex">
+  <!-- Página autocontenida (sin CSS ni fuentes externas) para funcionar en cualquier ruta del servidor. -->
+  <style>
+    body{margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#F2ECE2;color:#4A423B;min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+    main{position:relative;z-index:1;padding:2rem 1.5rem;max-width:40rem;margin:0 auto}
+    p.e{font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6E645A}
+    h1{font-family:Georgia,"Iowan Old Style",serif;font-weight:400;color:#2A2420;font-size:clamp(2.25rem,6vw,3.5rem);line-height:1.06;margin:.5rem 0 1rem}
+    a.b{display:inline-block;background:#9E4A22;color:#fff;padding:.9rem 1.5rem;font-weight:600;text-decoration:none}
+    a.b:hover{background:#7C3816}
+    a:focus-visible{outline:2px solid #9E4A22;outline-offset:3px}
+    svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:55%}
+    svg path{fill:none;stroke:#8A8073;stroke-width:1;vector-effect:non-scaling-stroke;opacity:.4}
+  </style>
+</head>
+<body>
+  <svg viewBox="0 0 1440 360" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M0 150 C 240 110, 480 190, 720 150 S 1200 110, 1440 150"/>
+    <path d="M0 200 C 260 160, 500 240, 740 200 S 1210 160, 1440 200"/>
+    <path d="M0 250 C 280 210, 520 290, 760 250 S 1220 210, 1440 250"/>
+    <path d="M0 300 C 300 260, 540 340, 780 300 S 1230 260, 1440 300"/>
+  </svg>
+  <main>
+    <p class="e">Aravá · Error 404</p>
+    <h1>Esta página no existe.</h1>
+    <p>Pero el Quindío sí. Vuelve al inicio.</p>
+    <p><a class="b" id="home" href="index.html">Ir al inicio</a></p>
+  </main>
+  <script>
+    /* En GitHub Pages (sitio de proyecto) la raíz es /<repositorio>/; en Hostinger es /. */
+    (function () {
+      var a = document.getElementById("home"), seg = location.pathname.split("/").filter(Boolean);
+      a.href = /\.github\.io$/.test(location.hostname) && seg.length ? "/" + seg[0] + "/" : "/";
+    })();
+  </script>
+</body>
+</html>

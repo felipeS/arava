@@ -1,0 +1,228 @@
+<!doctype html>
+<!-- Marca provisional. Sustituir .ar-wordmark cuando la identidad sea aprobada. -->
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contacto · Aravá · Constructora en el Quindío</title>
+  <meta name="description" content="Escríbele a Aravá: información sobre Hito 18, Montes de Bremen, próximos proyectos, proveedores o trabajo.">
+  <meta name="theme-color" content="#FBF8F3">
+  <meta name="format-detection" content="telephone=no">
+  <!-- URL canónica y og:image absolutos: completar cuando se confirme el dominio de Hostinger. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="Aravá">
+  <meta property="og:title" content="Contacto · Aravá · Constructora en el Quindío">
+  <meta property="og:description" content="Escríbele a Aravá: información sobre Hito 18, Montes de Bremen, próximos proyectos, proveedores o trabajo.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/fraunces-latin-opsz-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/work-sans-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.purged.min.css">
+  <link rel="stylesheet" href="assets/css/arava.css?v=20261108">
+</head>
+<body data-page="contacto">
+<a class="ar-skip" href="#contenido">Ir al contenido</a>
+<header class="site-header">
+  <div class="container">
+    <a class="ar-wordmark" href="index.html" aria-label="Aravá, inicio (marca provisional)"><span class="ar-wordmark__name">Aravá</span><span class="ar-wordmark__rule" aria-hidden="true"></span></a>
+    <button class="ar-nav-toggle d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#site-menu" aria-controls="site-menu" aria-expanded="false" aria-label="Abrir menú">
+      <span aria-hidden="true">Menú</span><span class="ar-nav-toggle__icon" aria-hidden="true"></span>
+    </button>
+    <div class="offcanvas-lg offcanvas-end ar-menu" tabindex="-1" id="site-menu" aria-label="Menú principal">
+      <div class="ar-menu__head offcanvas-header">
+        <span class="ar-eyebrow">Menú</span>
+        <button type="button" class="ar-nav-toggle" data-bs-dismiss="offcanvas" data-bs-target="#site-menu" aria-label="Cerrar menú">
+          <span aria-hidden="true">Cerrar</span><span class="ar-nav-toggle__icon" aria-hidden="true" style="--x:1"></span>
+        </button>
+      </div>
+      <div class="ar-menu__body offcanvas-body">
+        <nav aria-label="Principal">
+          <ul class="ar-menu__list">
+            <li><a class="ar-menu__link" href="index.html">Inicio</a></li>
+            <li><a class="ar-menu__link" href="nosotros.html">Nosotros</a></li>
+            <li><a class="ar-menu__link" href="proyectos.html">Proyectos</a></li>
+            <li><a class="ar-menu__link" href="contacto.html" aria-current="page">Contacto</a></li>
+          </ul>
+        </nav>
+        <div class="ar-menu__foot">
+          <p class="ar-eyebrow">Quindío, Colombia</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="contenido" tabindex="-1">
+  <section class="ar-page-head" aria-labelledby="page-title">
+    <div class="container">
+      <p class="ar-eyebrow">Contacto</p>
+      <h1 id="page-title">Hablemos.</h1>
+      <p class="ar-lead">Cuéntanos qué te interesa y te respondemos.</p>
+    </div>
+  </section>
+
+  <section class="ar-section pt-0" aria-label="Formulario y datos de contacto">
+    <div class="container">
+      <div class="row gy-5 gx-lg-5">
+        <div class="col-lg-7">
+          <div class="ar-horizon">
+            <p class="ar-eyebrow">Escríbenos</p>
+            <div class="pt-3">
+              <div class="ar-notice" id="form-not-configured" role="status">
+                <p><strong>Este formulario aún no está conectado.</strong> Por ahora no envía tus datos a Aravá; te avisaremos aquí cuando esté activo.</p>
+              </div>
+              <div class="form-status" id="form-status" tabindex="-1" hidden></div>
+              <form class="ar-form" id="contact-form" novalidate>
+                <div class="ar-field">
+            <label for="nombre">Nombre <span class="ar-required">(obligatorio)</span></label>
+            <input class="ar-input" type="text" id="nombre" name="nombre" autocomplete="name" required maxlength="120" aria-describedby="nombre-error">
+            
+            <p class="ar-error" id="nombre-error" hidden></p>
+          </div>
+                <div class="ar-field">
+            <label for="telefono">Teléfono o WhatsApp <span class="ar-required">(obligatorio)</span></label>
+            <input class="ar-input" type="tel" id="telefono" name="telefono" inputmode="tel" autocomplete="tel" required maxlength="25" aria-describedby="telefono-error telefono-help">
+            <p class="ar-help" id="telefono-help">Con indicativo si no es de Colombia.</p>
+            <p class="ar-error" id="telefono-error" hidden></p>
+          </div>
+                <div class="ar-field">
+            <label for="correo">Correo electrónico <span class="ar-required">(obligatorio)</span></label>
+            <input class="ar-input" type="email" id="correo" name="correo" autocomplete="email" required maxlength="160" aria-describedby="correo-error">
+            
+            <p class="ar-error" id="correo-error" hidden></p>
+          </div>
+                <div class="ar-field">
+            <label for="interes">¿Qué te interesa? <span class="ar-required">(obligatorio)</span></label>
+            <select class="ar-input" id="interes" name="interes" required aria-describedby="interes-error">
+              <option value="">Elige una opción</option>
+              <option value="hito18">Hito 18</option>
+              <option value="bremen">Montes de Bremen</option>
+              <option value="otro">Otro proyecto o próximos proyectos</option>
+              <option value="proveedores">Proveedores</option>
+              <option value="trabajo">Trabajar con nosotros</option>
+            </select>
+            
+            <p class="ar-error" id="interes-error" hidden></p>
+          </div>
+                <div class="ar-field">
+            <label for="mensaje">Mensaje <span class="ar-optional">(opcional)</span></label>
+            <textarea class="ar-input" id="mensaje" name="mensaje" rows="4" maxlength="2000"></textarea>
+            
+            <p class="ar-error" id="mensaje-error" hidden></p>
+          </div>
+                <div class="ar-honeypot" aria-hidden="true">
+                  <label for="empresa_web">No llenar este campo</label>
+                  <input type="text" id="empresa_web" name="empresa_web" tabindex="-1" autocomplete="off">
+                </div>
+                <div class="ar-field">
+                  <div class="ar-check">
+                    <input type="checkbox" id="autorizacion" name="autorizacion" required aria-describedby="autorizacion-error">
+                    <label for="autorizacion">Autorizo el tratamiento de mis datos personales según la <a href="politica-de-datos.html">política de tratamiento de datos</a>. <span class="ar-required">(obligatorio)</span></label>
+                  </div>
+                  <p class="ar-error" id="autorizacion-error" hidden></p>
+                </div>
+                <p class="ar-help mb-4">Junto con tu mensaje registramos la página por la que llegaste y, si existen, los parámetros de campaña del enlace (por ejemplo, UTM), como explica la política.</p>
+                <button type="submit" class="ar-btn ar-btn--primary">Enviar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <aside class="ar-details" aria-labelledby="datos-title">
+            <h2 id="datos-title">Datos de contacto</h2>
+            <dl>
+              <div data-contact-row="address" hidden><dt class="ar-eyebrow">Oficina</dt><dd data-contact="address"></dd></div>
+              <div data-contact-row="hours" hidden><dt class="ar-eyebrow">Horario</dt><dd data-contact="hours"></dd></div>
+              <div data-contact-row="email" hidden><dt class="ar-eyebrow">Correo</dt><dd data-contact="email"></dd></div>
+              <div data-contact-row="phoneDisplay" hidden><dt class="ar-eyebrow">Teléfono</dt><dd data-contact="phoneDisplay"></dd></div>
+              <div data-contact-row="whatsapp" hidden><dt class="ar-eyebrow">WhatsApp</dt><dd><a data-whatsapp data-wa-context="contacto" hidden>Escríbenos por WhatsApp ↗</a></dd></div>
+              <div data-contact-row="mapUrl" hidden><dt class="ar-eyebrow">Cómo llegar</dt><dd data-contact="mapUrl"></dd></div>
+            </dl>
+            <ul class="list-unstyled d-flex flex-wrap gap-3" data-social-list>
+              <li><a data-social="instagram" target="_blank" rel="noopener" hidden>Instagram ↗</a></li>
+              <li><a data-social="facebook" target="_blank" rel="noopener" hidden>Facebook ↗</a></li>
+              <li><a data-social="linkedin" target="_blank" rel="noopener" hidden>LinkedIn ↗</a></li>
+              <li><a data-social="youtube" target="_blank" rel="noopener" hidden>YouTube ↗</a></li>
+            </ul>
+            <p data-contact-empty>Estamos actualizando nuestros canales de contacto. Pronto publicaremos aquí la dirección de la oficina en Armenia, el horario y la sala de ventas.</p>
+            <h3 class="ar-eyebrow mt-4 mb-3">Páginas de los proyectos</h3>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><a data-project-url="hito18" href="https://hito18.com" target="_blank" rel="noopener" data-track="landing_click" data-project="hito18">Hito 18 ↗</a></li>
+              <li><a data-project-url="bremen" href="https://montes-de-bremen.vercel.app/es" target="_blank" rel="noopener" data-track="landing_click" data-project="bremen">Montes de Bremen ↗</a></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer ar-on-dark">
+  <div class="container">
+    <div class="row gy-5">
+      <div class="col-12 col-md-6 col-lg-4">
+        <a class="ar-wordmark" href="index.html" aria-label="Aravá, inicio (marca provisional)"><span class="ar-wordmark__name">Aravá</span><span class="ar-wordmark__rule" aria-hidden="true"></span></a>
+        <p class="ar-footer__note mt-3">Constructora · Quindío, Colombia</p>
+        <p class="ar-footer__note">Identidad gráfica provisional</p>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2">
+        <h2>Navegación</h2>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="proyectos.html">Proyectos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="politica-de-datos.html">Política de datos</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2">
+        <h2>Proyectos</h2>
+        <ul>
+          <li><a data-project-url="hito18" href="https://hito18.com" target="_blank" rel="noopener" data-track="landing_click" data-project="hito18">Hito 18 ↗</a></li>
+          <li><a data-project-url="bremen" href="https://montes-de-bremen.vercel.app/es" target="_blank" rel="noopener" data-track="landing_click" data-project="bremen">Montes de Bremen ↗</a></li>
+          <li><a href="proyectos.html#proximos">Próximos proyectos</a></li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-4">
+        <h2>Contacto</h2>
+        <ul>
+          <li data-contact-row="address" hidden><span data-contact="address"></span></li>
+          <li data-contact-row="hours" hidden><span data-contact="hours"></span></li>
+          <li data-contact-row="email" hidden><span data-contact="email"></span></li>
+          <li data-contact-row="phoneDisplay" hidden><span data-contact="phoneDisplay"></span></li>
+          <li data-contact-row="whatsapp" hidden><a data-whatsapp data-wa-context="contacto" hidden>WhatsApp ↗</a></li>
+        </ul>
+        <ul class="d-flex flex-wrap gap-3 mt-2" data-social-list>
+          <li><a data-social="instagram" hidden>Instagram ↗</a></li>
+          <li><a data-social="facebook" hidden>Facebook ↗</a></li>
+          <li><a data-social="linkedin" hidden>LinkedIn ↗</a></li>
+          <li><a data-social="youtube" hidden>YouTube ↗</a></li>
+        </ul>
+        <div data-contact-empty>
+          <p>Estamos actualizando nuestros canales de contacto.</p>
+          <p><a href="contacto.html">Escríbenos desde la página de contacto →</a></p>
+        </div>
+      </div>
+    </div>
+    <ul class="ar-footer__bottom list-unstyled">
+      <li>© <span data-year>2026</span> Aravá</li>
+      <li><a href="politica-de-datos.html">Aviso de tratamiento de datos</a></li>
+      <li><button type="button" data-consent-open>Preferencias de cookies</button></li>
+    </ul>
+  </div>
+</footer>
+
+<div class="ar-consent" id="consent-banner" role="region" aria-labelledby="consent-title" hidden>
+  <h2 id="consent-title">Medición del sitio</h2>
+  <p>Usamos Google Analytics y Microsoft Clarity solo si lo aceptas, para entender cómo se usa el sitio. Puedes cambiar tu decisión en «Preferencias de cookies». <a href="politica-de-datos.html#cookies">Más información</a>.</p>
+  <div class="ar-btn-row">
+    <button type="button" class="ar-btn ar-btn--primary" data-consent-accept>Aceptar medición</button>
+    <button type="button" class="ar-btn ar-btn--secondary" data-consent-reject>Rechazar</button>
+  </div>
+</div>
+
+<script src="assets/vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
+<script src="assets/js/site-config.js?v=20261108" defer></script>
+<script src="assets/js/arava.js?v=20261108" defer></script>
+</body>
+</html>
