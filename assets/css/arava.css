@@ -355,12 +355,12 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(1px, -1px); }
 .ar-card__title a { color: var(--ar-verde-profundo); text-decoration: none; }
 .ar-card:hover .ar-card__title a { text-decoration: underline; text-decoration-thickness: 1px; }
 .ar-card__meta { margin-bottom: .75rem; }
+.ar-card__meta .ar-tag + .visually-hidden + .ar-tag { margin-left: 1.25em; }
 .ar-card__text { font-size: var(--ar-fs-body); margin-bottom: 1.25rem; }
 .ar-card__links { margin-top: auto; display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; position: relative; z-index: 2; }
 .ar-card .ar-caption { padding: .5rem 1.25rem 0; margin: 0; }
 
 .ar-badge { display: inline-flex; align-items: center; gap: .4rem; height: 24px; padding: 0 .65rem; border-radius: 999px; font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; line-height: 1; white-space: nowrap; }
-.ar-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 .ar-badge--en-venta { color: var(--ar-verde); background: var(--ar-verde-tinte); }
 .ar-badge--en-construccion { color: var(--ar-bronce-oscuro); background: var(--ar-bronce-tinte); }
 .ar-badge--entregados { color: var(--ar-verde-profundo); background: var(--ar-ceniza); }
@@ -432,6 +432,11 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(1px, -1px); }
 /* ------------------------------------------------------------------
  * 14. Banda CTA (Verde) y pie (Verde profundo) (v2 §4.8, §4.9)
  * ---------------------------------------------------------------- */
+/* Logo real (arava-logo-light.svg, sin modificar) como fondo a todo el ancho, sangrando por el borde inferior.
+   Opacidad .09: en el peor caso (texto sobre un trazo) ceniza 4,8:1 y crema 6,2:1 sobre el verde mezclado (AA). */
+.ar-cta--logo { overflow: hidden; }
+.ar-cta--logo .container { position: relative; z-index: 1; }
+.ar-cta__logo { position: absolute; left: 0; right: 0; bottom: 0; transform: translateY(24%); width: 100%; max-width: none; height: auto; opacity: .09; pointer-events: none; user-select: none; }
 .ar-cta h2 { color: var(--ar-crema); margin-top: .75rem; }
 .ar-cta .ar-eyebrow { color: var(--ar-ceniza); }
 .ar-cta .ar-lead { color: var(--ar-ceniza); margin: 1rem 0 2rem; }
