@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+# Sitemap: añadir con la URL absoluta cuando se confirme el dominio.
