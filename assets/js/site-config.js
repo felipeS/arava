@@ -36,6 +36,15 @@ window.ARAVA_CONFIG = {
     bremen: "https://montes-de-bremen.vercel.app/es"  // referencia pública actual; cambiar cuando tenga dominio propio
   },
 
+  /*
+   * Línea de presencia (pie y menú móvil). Fuente: bio pública de Instagram @arava.construcciones
+   * (2026-11-09): «📍 Armenia • Santa Marta • Medellín». Es presencia de marca, no lista de proyectos.
+   * Vacío ("") => la línea se oculta.
+   */
+  presence: {
+    cities: "Armenia · Santa Marta · Medellín"
+  },
+
   /* Redes oficiales. Solo se muestran las que tengan URL. */
   social: {
     instagram: "",

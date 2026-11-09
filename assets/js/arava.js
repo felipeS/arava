@@ -500,6 +500,15 @@
     check();
   }
 
+  /* Línea de presencia editable desde site-config.js; vacía => se oculta (nunca se inventa). */
+  function initPresence() {
+    var pres = CFG.presence;
+    if (!pres || typeof pres.cities !== "string") return;
+    $all("[data-presence]").forEach(function (el) {
+      if (has(pres.cities)) el.textContent = pres.cities.trim(); else el.hidden = true;
+    });
+  }
+
   function initYear() {
     $all("[data-year]").forEach(function (el) { el.textContent = String(new Date().getFullYear()); });
   }
@@ -569,6 +578,7 @@
   function init() {
     initPreview();
     initYear();
+    initPresence();
     initTrustStrip();
     initProjectLinks();
     initHeader();
