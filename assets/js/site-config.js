@@ -38,7 +38,7 @@ window.ARAVA_CONFIG = {
 
   /*
    * Línea de presencia (pie y menú móvil). Fuente: bio pública de Instagram @arava.construcciones
-   * (2026-11-09): «📍 Armenia • Santa Marta • Medellín». Es presencia de marca, no lista de proyectos.
+   * (2026-11-09): «Armenia • Santa Marta • Medellín» (con ícono de ubicación). Es presencia de marca, no lista de proyectos.
    * Vacío ("") => la línea se oculta.
    */
   presence: {

@@ -12,6 +12,9 @@
   var CONSENT_KEY = "arava_consent_v1";
   var ATTR_PARAMS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "utm_id", "fbclid", "gclid", "wbraid", "gbraid"];
 
+  /* Iconos Lucide (ISC) en línea, iguales a los del HTML (assets/vendor/lucide/LICENSE.txt) */
+  var ICON_EXT = '<svg class="ar-icon ar-icon--arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg><span class="visually-hidden"> (se abre en una pestaña nueva)</span>';
+
   function $(sel, ctx) { return (ctx || doc).querySelector(sel); }
   function $all(sel, ctx) { return Array.prototype.slice.call((ctx || doc).querySelectorAll(sel)); }
   function has(v) { return typeof v === "string" && v.trim() !== ""; }
@@ -219,7 +222,7 @@
           var a = doc.createElement("a"); a.href = "mailto:" + val; a.textContent = val; el.appendChild(a);
         } else if (key === "mapUrl") {
           el.textContent = "";
-          var m = doc.createElement("a"); m.href = val; m.target = "_blank"; m.rel = "noopener"; m.textContent = "Ver en Google Maps ↗"; el.appendChild(m);
+          var m = doc.createElement("a"); m.href = val; m.target = "_blank"; m.rel = "noopener"; m.textContent = "Ver en Google Maps"; m.insertAdjacentHTML("beforeend", ICON_EXT); el.appendChild(m);
         } else {
           el.textContent = val;
         }
@@ -236,7 +239,7 @@
   }
 
   /* ---------------------------------------------------------------
-   * 5. Formulario de contacto → CRM
+   * 5. Formulario de contacto: envío al CRM
    * ------------------------------------------------------------- */
   function initContactForm() {
     var form = $("#contact-form");
@@ -387,7 +390,7 @@
           panel.setAttribute("role", "status");
           panel.tabIndex = -1;
           panel.innerHTML = '<h3 class="ar-h3" style="color:inherit;margin:0 0 .5rem">Gracias. Te escribimos pronto.</h3>' +
-            (waValid ? '<p style="margin:0">Si prefieres, también puedes <a href="https://wa.me/' + waNumber + "?text=" + encodeURIComponent(WA_TEXT.contacto) + '" target="_blank" rel="noopener" data-track="whatsapp_click">escribirnos por WhatsApp ↗</a>.</p>' : '<p style="margin:0">Recibimos tu mensaje.</p>');
+            (waValid ? '<p style="margin:0">Si prefieres, también puedes <a href="https://wa.me/' + waNumber + "?text=" + encodeURIComponent(WA_TEXT.contacto) + '" target="_blank" rel="noopener" data-track="whatsapp_click">escribirnos por WhatsApp' + ICON_EXT + '</a>.</p>' : '<p style="margin:0">Recibimos tu mensaje.</p>');
           form.hidden = true;
           if (notice) notice.hidden = true;
           status.hidden = true;
@@ -505,7 +508,8 @@
     var pres = CFG.presence;
     if (!pres || typeof pres.cities !== "string") return;
     $all("[data-presence]").forEach(function (el) {
-      if (has(pres.cities)) el.textContent = pres.cities.trim(); else el.hidden = true;
+      var span = el.querySelector("[data-presence-text]") || el;
+      if (has(pres.cities)) span.textContent = pres.cities.trim(); else el.hidden = true;
     });
   }
 

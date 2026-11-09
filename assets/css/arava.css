@@ -149,6 +149,13 @@ img { max-width: 100%; height: auto; display: block; }
 .ar-lead { font-size: var(--ar-fs-lead); line-height: 1.5; color: var(--ar-tinta); max-width: 36rem; }
 .ar-small, .ar-caption { font-size: var(--ar-fs-small); line-height: 1.5; color: var(--ar-tinta-suave); }
 .ar-num { font-variant-numeric: lining-nums tabular-nums; }
+/* Iconos Lucide en línea (ISC): trazo fino 1,5, heredan color */
+.ar-icon { display: inline-block; width: 1em; height: 1em; flex: none; vertical-align: -0.14em; margin-left: .3em; stroke: currentColor; fill: none; transition: transform var(--ar-dur-micro) var(--ar-ease); }
+.ar-icon--lead { margin: 0 .45em 0 0; }
+a:hover > .ar-icon--arrow-right, .ar-card:hover .ar-icon--arrow-right { transform: translateX(2px); }
+a:hover > .ar-icon--arrow-up-right { transform: translate(1px, -1px); }
+.ar-presence { display: flex; align-items: center; }
+.ar-presence .ar-icon { width: 1.15em; height: 1.15em; }
 
 /* ------------------------------------------------------------------
  * 4. Superficies y líneas guía (v2 §1.4, §3)
