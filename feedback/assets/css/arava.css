@@ -248,8 +248,11 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 .ar-on-dark .ar-ctrl:hover { background: var(--ar-claro); border-color: var(--ar-claro); color: var(--ar-verde-profundo); }
 
 /* Hero de Inicio: los renders de los proyectos a todo el ancho, con fundido y un acercamiento lento */
-.ar-reel { position: relative; display: flex; align-items: flex-end; min-height: clamp(34rem, calc(100vh - var(--ar-header-h)), 50rem); background: var(--ar-verde-profundo); color: var(--ar-claro); overflow: hidden; }
-@supports (height: 100svh) { .ar-reel { min-height: clamp(34rem, calc(100svh - var(--ar-header-h)), 50rem); } }
+.ar-reel { position: relative; display: flex; align-items: flex-end; min-height: clamp(26rem, calc(100vh - var(--ar-header-h) - 15rem), 40rem); background: var(--ar-verde-profundo); color: var(--ar-claro); overflow: hidden; }
+@supports (height: 100svh) { .ar-reel { min-height: clamp(26rem, calc(100svh - var(--ar-header-h) - 15rem), 40rem); } }
+/* Los proyectos suben: la sección que sigue al reel arranca más cerca */
+.ar-reel + .ar-section { padding-top: 2.75rem; }
+.ar-reel + .ar-section > .container > .ar-head { margin-bottom: 1.75rem; }
 .ar-reel .carousel-inner { position: absolute; inset: 0; }
 /* Velo verde: asegura el contraste del texto sobre cualquier render */
 .ar-reel .carousel-inner::after { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgba(8, 48, 54, .3) 0%, rgba(8, 48, 54, .08) 24%, rgba(8, 48, 54, .5) 52%, rgba(8, 48, 54, .9) 100%); }
@@ -265,8 +268,8 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 .ar-reel.is-ready .carousel-item-next img,
 .ar-reel.is-ready .carousel-item-prev img { animation: ar-reel-zoom 9s linear both; }
 
-.ar-reel__content { position: relative; z-index: 3; width: 100%; padding-block: 7rem 1rem; }
-.ar-reel h1 { font-size: var(--ar-fs-display); font-weight: 800; line-height: .96; letter-spacing: -0.04em; color: var(--ar-claro); margin: 0 0 1.25rem; }
+.ar-reel__content { position: relative; z-index: 3; width: 100%; padding-block: 3.5rem 1rem; }
+.ar-reel h1 { font-size: clamp(2.75rem, 6vw, 5.5rem); font-weight: 800; line-height: .96; letter-spacing: -0.04em; color: var(--ar-claro); margin: 0 0 1.25rem; }
 .ar-reel__row { display: grid; gap: 1.25rem; }
 .ar-reel .ar-lead { max-width: 28rem; margin: 0 0 1.5rem; color: var(--ar-claro); }
 .ar-reel__captions { display: grid; }
@@ -287,14 +290,15 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 .ar-dot[aria-current="true"]::after { transform: none; }
 @keyframes ar-dot-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .ar-reel:not(.is-paused) .ar-dot[aria-current="true"]::after { animation: ar-dot-fill var(--ar-reel-ms, 6500ms) linear both; }
+@media (max-width: 359.98px) { .ar-reel .ar-btn { padding-inline: 1.125rem; } }
 @media (min-width: 768px) { .ar-dot { flex-basis: 3.5rem; } }
 @media (min-width: 992px) {
-  .ar-reel__content { padding-block: 9rem 1.5rem; }
-  .ar-reel h1 { margin-bottom: 1.75rem; }
+  .ar-reel__content { padding-block: 4rem 1.25rem; }
+  .ar-reel h1 { margin-bottom: 1.5rem; }
   .ar-reel__row { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); column-gap: 8.333%; align-items: end; }
-  .ar-reel .ar-lead { margin-bottom: 1.75rem; }
+  .ar-reel .ar-lead { margin-bottom: 1.5rem; }
   .ar-reel__captions { justify-items: end; text-align: right; }
-  .ar-reel__bar { margin-top: 2rem; }
+  .ar-reel__bar { margin-top: 1.5rem; }
   /* En pantallas anchas el titular va a la izquierda: se refuerza el velo de ese lado */
   .ar-reel .carousel-inner::after { background: linear-gradient(90deg, rgba(8, 48, 54, .55) 0%, rgba(8, 48, 54, 0) 62%), linear-gradient(180deg, rgba(8, 48, 54, .3) 0%, rgba(8, 48, 54, .05) 26%, rgba(8, 48, 54, .4) 56%, rgba(8, 48, 54, .88) 100%); }
 }
@@ -306,9 +310,12 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 .ar-slider__bar { display: flex; align-items: flex-start; justify-content: space-between; gap: .75rem; margin-top: .75rem; }
 .ar-slider:not(.is-ready) .ar-slider__bar { visibility: hidden; }
 .ar-thumbs { display: flex; gap: .5rem; min-width: 0; padding-bottom: .5rem; }
-.ar-thumb { position: relative; flex: 0 1 4.125rem; aspect-ratio: 3 / 2; padding: 0; border: 0; border-radius: 0; background: var(--ar-papel-2); cursor: pointer; opacity: .6; transition: opacity var(--ar-dur-micro) var(--ar-ease); }
-.ar-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.ar-thumb:hover, .ar-thumb[aria-current="true"] { opacity: 1; }
+.ar-thumb { position: relative; flex: 0 1 4.125rem; aspect-ratio: 3 / 2; padding: 0; border: 0; border-radius: 0; background: var(--ar-papel-2); cursor: pointer; transition: box-shadow var(--ar-dur-micro) var(--ar-ease); }
+.ar-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: .7; transition: opacity var(--ar-dur-micro) var(--ar-ease); }
+/* Marco fino por dentro: las imágenes claras no se pierden contra el fondo */
+.ar-thumb::before { content: ""; position: absolute; inset: 0; z-index: 1; border: 1px solid rgba(8, 48, 54, .32); pointer-events: none; transition: border-color var(--ar-dur-micro) var(--ar-ease); }
+.ar-thumb:hover img, .ar-thumb[aria-current="true"] img { opacity: 1; }
+.ar-thumb:hover::before, .ar-thumb[aria-current="true"]::before { border-color: var(--ar-verde); }
 .ar-thumb[aria-current="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -.5rem; border-top: 2px solid var(--ar-verde); }
 @media (min-width: 576px) { .ar-thumb { flex-basis: 5.5rem; } }
 
@@ -343,6 +350,17 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 @media (min-width: 992px) { .ar-page-head + .ar-section.pt-0, .ar-page-head + .ar-section.pt-2 { padding-top: 4rem !important; } }
 /* Accesos a cada proyecto dentro de la página */
 .ar-jump { list-style: none; display: flex; flex-wrap: wrap; gap: .75rem 2.25rem; margin: 1.75rem 0 0; padding: 0; }
+
+/* Trayectoria (Inicio): franja corta entre dos líneas, cierra el bloque de proyectos */
+.ar-trayectoria { padding-block: calc(var(--ar-section-y) * .5); }
+.ar-trayectoria__grid { display: grid; gap: 1rem; padding-block: 1.75rem; border-block: 1px solid var(--ar-verde); }
+.ar-trayectoria h2 { margin: 0; font-size: clamp(1.625rem, 1.25rem + 1.6vw, 2.5rem); }
+.ar-trayectoria__grid p { margin: 0; }
+.ar-trayectoria__grid .ar-lead { margin-bottom: .75rem; }
+@media (min-width: 992px) {
+  .ar-trayectoria__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); column-gap: 8.333%; align-items: center; padding-block: 2.5rem; }
+  .ar-trayectoria h2 { max-width: 18ch; }
+}
 
 /* 8. Cajetín de cifras: solo cifras confirmadas y con prueba (site-config.js). Oculto mientras no las haya. */
 .ar-trust { margin-top: 3rem; }
