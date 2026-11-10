@@ -1,7 +1,7 @@
 /*
  * Aravá: comportamiento del sitio (JavaScript sin dependencias, salvo Bootstrap para el menú).
  * Módulos: atribución de campaña, consentimiento + analítica, eventos, WhatsApp,
- * datos de contacto, formulario CRM, filtro de proyectos, encabezado y animaciones.
+ * datos de contacto, formulario CRM, carruseles, encabezado y animaciones.
  */
 (function () {
   "use strict";
@@ -409,37 +409,79 @@
   }
 
   /* ---------------------------------------------------------------
-   * 6. Filtro de proyectos
+   * 6. Carruseles (hero de Inicio y galerías de proyecto)
+   * Usa Carousel de Bootstrap para la transición, el teclado y el gesto táctil.
+   * Solo el hero avanza solo, y nunca con «movimiento reducido» activo.
    * ------------------------------------------------------------- */
-  function initProjectFilter() {
-    var bar = $("[data-filter-bar]");
-    if (!bar) return;
-    var buttons = $all("[data-filter]", bar);
-    var cards = $all("[data-status]");
-    var live = $("#filter-live");
-    var empty = $("#filter-empty");
-    var LABELS = { todos: "todos los estados", "en-venta": "En venta", "en-construccion": "En construcción", entregados: "Entregados", proximamente: "Próximamente" };
+  function initSliders() {
+    if (!window.bootstrap || !window.bootstrap.Carousel) return;
+    $all("[data-slider]").forEach(function (el) {
+      var items = $all(".carousel-item", el);
+      if (items.length < 2) return;
+      var autoplay = el.hasAttribute("data-slider-autoplay");
+      var interval = parseInt(el.getAttribute("data-slider-autoplay"), 10) || 6500;
+      var carousel = new window.bootstrap.Carousel(el, { interval: interval, ride: false, pause: false, wrap: true, touch: true, keyboard: true });
+      var gotos = $all("[data-slide-to]", el);
+      var captions = $all("[data-slide-caption]", el);
+      var live = $("[data-slide-live]", el);
+      var toggle = $("[data-slide-toggle]", el);
+      var playing = false;   /* lo que eligió la persona */
+      var held = false;      /* pausa temporal mientras el foco del teclado está dentro */
 
-    function apply(filter, updateUrl) {
-      var shown = 0;
-      buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-filter") === filter)); });
-      cards.forEach(function (c) {
-        var statuses = (c.getAttribute("data-status") || "").split(/\s+/);
-        var visible = filter === "todos" || statuses.indexOf(filter) !== -1;
-        c.hidden = !visible;
-        if (visible) shown++;
-      });
-      if (empty) empty.hidden = shown !== 0;
-      if (live) live.textContent = (shown === 1 ? "Mostrando 1 proyecto" : "Mostrando " + shown + " proyectos") + (filter === "todos" ? "." : " · " + LABELS[filter] + ".");
-      if (updateUrl && window.history && history.replaceState) {
-        var url = new URL(window.location.href);
-        if (filter === "todos") url.searchParams.delete("estado"); else url.searchParams.set("estado", filter);
-        history.replaceState(null, "", url.pathname + url.search + url.hash);
+      function sync(index, announce) {
+        gotos.forEach(function (b) {
+          if (Number(b.getAttribute("data-slide-to")) === index) b.setAttribute("aria-current", "true");
+          else b.removeAttribute("aria-current");
+        });
+        captions.forEach(function (c, i) { c.classList.toggle("is-active", i === index); });
+        if (live && announce) {
+          var img = $("img", items[index]);
+          live.textContent = "Imagen " + (index + 1) + " de " + items.length + (img && img.alt ? ": " + img.alt : "");
+        }
       }
-    }
-    buttons.forEach(function (b) { b.addEventListener("click", function () { apply(b.getAttribute("data-filter"), true); }); });
-    var initial = new URLSearchParams(window.location.search).get("estado");
-    apply(LABELS[initial] ? initial : "todos", false);
+      function run() {
+        var on = playing && !held;
+        if (on) carousel.cycle(); else carousel.pause();
+        el.classList.toggle("is-paused", !on);
+      }
+      function setPlaying(v) {
+        playing = v;
+        if (toggle) toggle.setAttribute("aria-label", v ? "Pausar el cambio automático de imágenes" : "Reanudar el cambio automático de imágenes");
+        run();
+      }
+
+      /* Las imágenes de las demás diapositivas se piden cuando el carrusel se acerca a la pantalla */
+      function preload() { $all("img[loading='lazy']", el).forEach(function (img) { img.loading = "eager"; }); }
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) {
+          if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); preload(); }
+        }, { rootMargin: "300px 0px" });
+        io.observe(el);
+      } else preload();
+
+      el.addEventListener("slide.bs.carousel", function (e) { sync(e.to, !autoplay || !playing || held); });
+      $all("[data-slide]", el).forEach(function (b) {
+        b.addEventListener("click", function () { if (b.getAttribute("data-slide") === "prev") carousel.prev(); else carousel.next(); });
+      });
+      gotos.forEach(function (b) {
+        b.addEventListener("click", function () { carousel.to(Number(b.getAttribute("data-slide-to"))); });
+      });
+
+      if (autoplay) {
+        el.style.setProperty("--ar-reel-ms", interval + "ms");
+        if (toggle) toggle.addEventListener("click", function () { setPlaying(!playing); });
+        /* Solo el foco de teclado detiene el avance; un clic con el ratón no. */
+        el.addEventListener("focusin", function (e) {
+          var kb = false;
+          try { kb = e.target.matches(":focus-visible"); } catch (err) { kb = true; }
+          if (kb) { held = true; run(); }
+        });
+        el.addEventListener("focusout", function (e) { if (held && !el.contains(e.relatedTarget)) { held = false; run(); } });
+        setPlaying(!prefersReducedMotion);
+      }
+      sync(0, false);
+      el.classList.add("is-ready");
+    });
   }
 
   /* ---------------------------------------------------------------
@@ -519,7 +561,7 @@
 
 
   /* ---------------------------------------------------------------
-   * 7b. Modo revisión (?preview=1), franja de confianza y enlaces de proyecto
+   * 7b. Modo revisión (?preview=1), cifras y enlaces de proyecto
    * ------------------------------------------------------------- */
   var isPreview = new URLSearchParams(window.location.search).get("preview") === "1";
 
@@ -531,30 +573,28 @@
 
   function escapeHtml(t) { var d = doc.createElement("div"); d.textContent = String(t); return d.innerHTML; }
 
-  /* Solo se muestran cifras confirmadas y con prueba (§7.3). Nunca guiones ni "XX". */
+  /*
+   * Cifras de Aravá (§7.3). Solo se publican cifras confirmadas, con valor y prueba; nunca guiones ni "XX".
+   * El bloque completo permanece oculto mientras haya menos de tres: una cifra suelta se ve pobre.
+   * Con ?preview=1 se muestra siempre, con las pendientes marcadas como «por confirmar».
+   */
   function initTrustStrip() {
     var list = $("[data-trust]");
     if (!list) return;
-    var facts = (CFG.facts || []).filter(function (f) { return f && f.confirmed === true && f.value !== null && f.value !== "" && has(f.proof); });
-    var pending = (CFG.facts || []).filter(function (f) { return f && f.confirmed !== true; });
-    var statements = $all("[data-trust-statement]", list);
-    if (facts.length >= 2 || isPreview) {
-      var html = facts.map(function (f) {
-        return '<li class="ar-trust__item"><span class="ar-trust__numeral">' + escapeHtml(f.value) + '</span>' +
-          '<span class="ar-eyebrow ar-trust__label">' + escapeHtml(f.label) + '</span><p class="ar-trust__proof">' + escapeHtml(f.proof) + "</p></li>";
-      }).join("");
-      /* Con menos de 3 cifras confirmadas se completan con afirmaciones verificables sin números */
-      var needed = Math.max(0, 3 - facts.length);
-      statements.slice(0, needed).forEach(function (st) { html += st.outerHTML; });
-      if (isPreview) {
-        pending.forEach(function (f) {
-          html += '<li class="ar-trust__item ar-trust__item--pending"><span class="ar-trust__statement">Cifra por confirmar con el equipo</span>' +
-            '<span class="ar-eyebrow ar-trust__label">' + escapeHtml(f.label) + "</span></li>";
-        });
-      }
-      list.innerHTML = html;
-    }
-    list.style.setProperty("--ar-trust-cols", String(Math.min(4, list.children.length)));
+    var section = list.closest("[data-trust-section]") || list;
+    var all = CFG.facts || [];
+    var facts = all.filter(function (f) { return f && f.confirmed === true && f.value !== null && f.value !== "" && has(f.proof); });
+    var pending = isPreview ? all.filter(function (f) { return f && facts.indexOf(f) === -1; }) : [];
+    if (facts.length < 3 && !isPreview) { section.hidden = true; return; }
+    list.innerHTML = facts.map(function (f) {
+      return '<li class="ar-trust__item"><span class="ar-trust__numeral">' + escapeHtml(f.value) + '</span>' +
+        '<span class="ar-eyebrow ar-trust__label">' + escapeHtml(f.label) + '</span><p class="ar-trust__proof">' + escapeHtml(f.proof) + "</p></li>";
+    }).join("") + pending.map(function (f) {
+      return '<li class="ar-trust__item ar-trust__item--pending"><span class="ar-trust__statement">Cifra por confirmar con el equipo</span>' +
+        '<span class="ar-eyebrow ar-trust__label">' + escapeHtml(f.label) + "</span></li>";
+    }).join("");
+    list.style.setProperty("--ar-trust-cols", String(Math.min(5, list.children.length)));
+    section.hidden = false;
   }
 
   function initProjectLinks() {
@@ -591,7 +631,7 @@
     initConsentBanner();
     initOutboundTracking();
     initContactForm();
-    initProjectFilter();
+    initSliders();
     initReveal();
   }
   if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", init);

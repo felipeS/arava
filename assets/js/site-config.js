@@ -19,15 +19,18 @@ window.ARAVA_CONFIG = {
   },
 
   /*
-   * Franja de confianza de Inicio (art-direction §7.3).
-   * Una cifra solo se muestra con confirmed:true, valor y prueba (proof).
-   * Las no confirmadas no se muestran nunca al público (solo en ?preview=1).
+   * Cifras de Aravá (bloque de cifras de Inicio).
+   * Una cifra solo se publica con confirmed:true, valor (value) y prueba (proof).
+   * El bloque aparece al público cuando hay al menos tres cifras confirmadas.
+   * Las pendientes nunca se muestran al público: solo en ?preview=1, como «por confirmar».
+   * No escribir aquí cifras estimadas.
    */
   facts: [
     { id: "generaciones", value: 4, label: "Generaciones", proof: "Bisabuelo, abuelo, padre y hoy nosotros.", confirmed: true },
     { id: "anios", value: null, label: "Años de trayectoria", proof: "", confirmed: false },
-    { id: "proyectos", value: null, label: "Proyectos construidos", proof: "", confirmed: false },
-    { id: "unidades", value: null, label: "Unidades entregadas", proof: "", confirmed: false }
+    { id: "obras", value: null, label: "Obras entregadas", proof: "", confirmed: false },
+    { id: "equipo", value: null, label: "Personas en el equipo", proof: "", confirmed: false },
+    { id: "clientes", value: null, label: "Clientes", proof: "", confirmed: false }
   ],
 
   /* Enlaces a landings de proyecto. Vacío => no se muestra el enlace. */
