@@ -450,14 +450,14 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
   .ar-awards__text { grid-column: 3; font-size: var(--ar-fs-body); }
 }
 
-/* Equipo: cuadrícula de retratos en Nosotros (sin nombres: no están confirmados) */
-.ar-equipo { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
-.ar-equipo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: var(--ar-papel-3); }
-.ar-equipo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Equipo: cuadrícula de retratos, solo en Nosotros (sin nombres: no están confirmados).
+   Los retratos mezclan fondo de estudio y de oficina; para que se lean como una sola serie,
+   todos llevan el mismo recorte (rostro al 25 % del alto, alineado a la misma altura) y el mismo
+   duotono suave Midnight green → gris, horneado en los WebP. 12 retratos: 2, 3 o 4 columnas sin huecos. */
+.ar-equipo { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ar-equipo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: var(--ar-papel-3); }
 @media (min-width: 576px) { .ar-equipo { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; } }
 @media (min-width: 992px) { .ar-equipo { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; } }
-.ar-equipo__marca { display: grid; place-items: center; aspect-ratio: 4 / 5; background: var(--ar-verde); }
-.ar-equipo .ar-equipo__marca img { width: 62%; height: auto; aspect-ratio: auto; object-fit: contain; background: none; }
 
 /* Galería de obra terminada: una foto ancha (3:2) y dos verticales (3:4) de la misma altura */
 .ar-galeria { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem .75rem; align-items: start; }
