@@ -415,15 +415,23 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
   .ar-gens--sube .ar-gen--now { margin-right: 0; padding-inline: 1.5rem; }
 }
 
-/* Línea de tiempo de obras (Nosotros). Oculta al público hasta tener obras confirmadas. */
-.ar-timeline { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--ar-verde); max-width: 44rem; }
-.ar-timeline > li { position: relative; padding: 0 0 2.25rem 1.75rem; }
-.ar-timeline > li:last-child { padding-bottom: 0; }
-.ar-timeline > li::before { content: ""; position: absolute; left: -5px; top: .625rem; width: 9px; height: 9px; background: var(--ar-papel); border: 1px solid var(--ar-verde); }
-.ar-timeline__year { font-family: var(--ar-font-display); font-weight: 600; font-size: 1.5rem; line-height: 1.1; color: var(--ar-verde); margin: 0 0 .25rem; }
-.ar-timeline h3 { margin: 0 0 .25rem; }
-.ar-timeline__meta { margin: 0; font-size: var(--ar-fs-small); color: var(--ar-tinta-suave); }
-.ar-timeline--pending .ar-timeline__year, .ar-timeline--pending h3 { color: var(--ar-niebla); font-weight: 400; }
+/* Obras de Arquitectura Civil (Nosotros): línea de tiempo en filas; en escritorio, cuatro por fila sobre una línea de terreno */
+.ar-obras { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--ar-verde); }
+.ar-obra { position: relative; display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 1rem; padding: 1.125rem 0; border-bottom: 1px solid var(--ar-linea); }
+.ar-obra__img { grid-row: 1 / span 3; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; background: var(--ar-papel-3); }
+.ar-obra > :not(.ar-obra__img) { grid-column: 2; }
+.ar-obra__year { margin: 0 0 .125rem; font-family: var(--ar-font-display); font-weight: 600; font-size: 1.0625rem; line-height: 1.2; color: var(--ar-teal); font-variant-numeric: lining-nums; }
+.ar-obra h3 { margin: 0 0 .25rem; font-size: 1.125rem; line-height: 1.2; }
+.ar-obra__meta { margin: 0; font-size: var(--ar-fs-small); line-height: 1.45; color: var(--ar-tinta-suave); }
+@media (min-width: 576px) {
+  .ar-obras { grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 0; }
+  .ar-obra { display: block; padding: 1.25rem 1.5rem 2rem 0; border-bottom: 0; border-top: 1px solid var(--ar-verde); }
+  .ar-obra::before { content: ""; position: absolute; left: 0; top: -5px; width: 9px; height: 9px; background: var(--ar-papel-2); border: 1px solid var(--ar-verde); }
+  .ar-obra__img { margin: .5rem 0 1rem; }
+  .ar-obra__year { font-size: 1.25rem; margin-bottom: .25rem; }
+}
+@media (min-width: 768px) { .ar-obras { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 992px) { .ar-obras { grid-template-columns: repeat(4, minmax(0, 1fr)); } .ar-obra { padding-right: 2rem; } }
 
 /* Premios y reconocimientos (Nosotros): año, premio y detalle en una fila */
 .ar-awards { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--ar-verde); }
