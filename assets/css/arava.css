@@ -325,7 +325,7 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 .ar-plano__vol path { stroke-width: 1.5; }
 .ar-plano__det path { stroke-width: 1; opacity: .5; }
 .ar-plano__guia path { stroke-width: 1; opacity: .5; }
-.ar-plano text { font-family: var(--ar-font-display); font-weight: 500; font-size: 20px; fill: var(--ar-verde-profundo); text-anchor: middle; }
+.ar-plano text { font-family: var(--ar-font-display); font-weight: 500; font-size: 20px; letter-spacing: .08em; fill: var(--ar-verde-profundo); text-anchor: middle; }
 @keyframes ar-trazo { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @keyframes ar-aparece { from { opacity: 0; } to { opacity: 1; } }
 .ar-plano--draw path { stroke-dasharray: 1; animation: ar-trazo 900ms var(--ar-ease) both; animation-delay: calc(var(--i, 0) * 170ms + 150ms); }
@@ -397,7 +397,7 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 .ar-gens { list-style: none; margin: 0; padding: 0; position: relative; display: grid; }
 .ar-gen { position: relative; display: grid; grid-template-columns: 3.5rem minmax(0, 1fr); column-gap: 1rem; padding: 1.5rem 0; border-top: 1px solid var(--ar-verde); }
 .ar-gen > * { grid-column: 2; }
-.ar-gen__num { grid-column: 1; grid-row: 1 / span 3; font-family: var(--ar-font-display); font-weight: 400; font-size: 2.5rem; line-height: 1; color: var(--ar-verde); }
+.ar-gen__num { grid-column: 1; grid-row: 1 / span 3; font-family: var(--ar-font-display); font-weight: 400; font-size: 2.5rem; line-height: 1; letter-spacing: .06em; color: var(--ar-verde); }
 .ar-gen__name { font-size: var(--ar-fs-h3); margin: .25rem 0 .125rem; }
 .ar-gen__era { font-size: var(--ar-fs-small); color: var(--ar-tinta-suave); margin: 0 0 .625rem; }
 .ar-gen__text { margin: 0; max-width: 32ch; }
@@ -545,6 +545,7 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 @media (min-width: 992px) { .ar-significado__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); column-gap: 8.333%; align-items: end; margin-top: 4.5rem; } }
 .ar-significado__hebreo { font-family: var(--ar-font-hebrew); font-size: clamp(5.5rem, 3rem + 11vw, 12rem); line-height: 1; color: var(--ar-claro); margin: 0; text-align: left; max-width: none; }
 .ar-significado__gloss { font-family: var(--ar-font-display); font-weight: 400; font-size: var(--ar-fs-serif-lead); color: var(--ar-claro); margin: .5rem 0 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--ar-linea-verde); max-width: 24rem; }
+.ar-significado__gloss em { font-style: normal; color: var(--ar-linea-clara); }
 .ar-significado .ar-name__say { margin-top: 0; color: var(--ar-ceniza); }
 .ar-significado .ar-name__say strong { color: var(--ar-claro); }
 .ar-cita { margin: 0 0 1.75rem; padding: 0; }

@@ -231,7 +231,7 @@
     var social = CFG.social || {};
     $all("[data-social]").forEach(function (el) {
       var url = social[el.getAttribute("data-social")];
-      if (has(url) && /^https:\/\//.test(url.trim())) { el.href = url.trim(); el.hidden = false; any = true; }
+      if (has(url) && /^https:\/\//.test(url.trim())) { el.href = url.trim(); el.target = "_blank"; el.rel = "noopener"; el.hidden = false; any = true; }
       else { var li = el.closest("li"); (li || el).remove(); }
     });
     $all("[data-social-list]").forEach(function (list) { list.hidden = list.children.length === 0; });

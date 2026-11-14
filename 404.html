@@ -7,9 +7,11 @@
   <meta name="description" content="Esta página no existe. Vuelve al inicio del sitio de Aravá.">
   <meta name="theme-color" content="#FFFFFF">
   <meta name="robots" content="noindex">
+  <link rel="icon" id="favicon" href="favicon.svg" type="image/svg+xml">
   <style>
     body{margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#FFFFFF;color:#1E2526;min-height:100vh;display:flex;align-items:center}
     main{position:relative;padding:2.5rem 2rem;max-width:36rem;margin:2.5rem auto}
+    @media (max-width:42rem){main{margin:2.5rem 1.5rem}}
     main::before,main::after{content:"";position:absolute;pointer-events:none}
     main::before{inset:0 -1.5rem;border-top:1px solid #0B515B;border-bottom:1px solid #0B515B}
     main::after{inset:-1.5rem 0;border-left:1px solid #0B515B;border-right:1px solid #0B515B}
@@ -36,6 +38,7 @@
       var root = /\.github\.io$/.test(location.hostname) && seg.length ? "/" + seg[0] + "/" : "/";
       a.href = root; document.getElementById("logo-link").href = root;
       document.getElementById("logo").src = root + "assets/brand/arava-logo.svg";
+      document.getElementById("favicon").href = root + "favicon.svg";
     })();
   </script>
 </body>
