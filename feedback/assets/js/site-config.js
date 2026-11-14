@@ -24,11 +24,17 @@ window.ARAVA_CONFIG = {
    * El bloque aparece al público cuando hay al menos tres cifras confirmadas.
    * Las pendientes nunca se muestran al público: solo en ?preview=1, como «por confirmar».
    * No escribir aquí cifras estimadas.
+   *
+   * Fuente de "primera-obra", "proyectos" y "premio": «Hoja de vida · Arquitectura Civil SAS 2024»
+   * (carpeta Zoho «Aravá - Recursos Corporativos», 03 — Historia y trayectoria). Son cifras de
+   * Arquitectura Civil S.A.S., la firma que antecede a Aravá; el pie del bloque lo dice.
+   * "proyectos": el documento lista 21 proyectos ejecutados (2003–2022) y 2 en ejecución; se publica «+20».
    */
   facts: [
     { id: "generaciones", value: 4, label: "Generaciones", proof: "Bisabuelo, abuelo, padre y hoy nosotros.", confirmed: true },
-    { id: "anios", value: null, label: "Años de trayectoria", proof: "", confirmed: false },
-    { id: "obras", value: null, label: "Obras entregadas", proof: "", confirmed: false },
+    { id: "primera-obra", value: 2003, label: "Primera obra", proof: "Parque Residencial San Simón, en Armenia: 47 casas, de 2003 a 2005.", confirmed: true },
+    { id: "proyectos", value: "+20", label: "Proyectos ejecutados", proof: "Vivienda, oficinas, clínicas y una institución educativa en Armenia, Pereira y Belén de Umbría.", confirmed: true },
+    { id: "premio", value: 2008, label: "Premio Nacional de Arquitectura", proof: "Premio Karl Brunner, XXI Bienal Colombiana de Arquitectura, por la peatonalización de la carrera 14 de Armenia.", confirmed: true },
     { id: "equipo", value: null, label: "Personas en el equipo", proof: "", confirmed: false },
     { id: "clientes", value: null, label: "Clientes", proof: "", confirmed: false }
   ],
@@ -81,7 +87,7 @@ window.ARAVA_CONFIG = {
   },
 
   /* Versión del texto de autorización de datos enviada con cada registro. */
-  privacyPolicyVersion: "2026-11-borrador",
+  privacyPolicyVersion: "2026-11-14-borrador",
 
   /* Días que se conserva la atribución de campaña (UTM / fbclid). */
   attributionDays: 90

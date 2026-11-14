@@ -231,7 +231,7 @@
     var social = CFG.social || {};
     $all("[data-social]").forEach(function (el) {
       var url = social[el.getAttribute("data-social")];
-      if (has(url) && /^https:\/\//.test(url.trim())) { el.href = url.trim(); el.hidden = false; any = true; }
+      if (has(url) && /^https:\/\//.test(url.trim())) { el.href = url.trim(); el.target = "_blank"; el.rel = "noopener"; el.hidden = false; any = true; }
       else { var li = el.closest("li"); (li || el).remove(); }
     });
     $all("[data-social-list]").forEach(function (list) { list.hidden = list.children.length === 0; });
@@ -593,7 +593,8 @@
       return '<li class="ar-trust__item ar-trust__item--pending"><span class="ar-trust__statement">Cifra por confirmar con el equipo</span>' +
         '<span class="ar-eyebrow ar-trust__label">' + escapeHtml(f.label) + "</span></li>";
     }).join("");
-    list.style.setProperty("--ar-trust-cols", String(Math.min(5, list.children.length)));
+    var n = list.children.length;
+    list.style.setProperty("--ar-trust-cols", String(n > 5 ? 3 : n));
     section.hidden = false;
   }
 

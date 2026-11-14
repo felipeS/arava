@@ -7,17 +7,19 @@
   <meta name="description" content="Esta página no existe. Vuelve al inicio del sitio de Aravá.">
   <meta name="theme-color" content="#FFFFFF">
   <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" id="favicon" href="favicon.svg" type="image/svg+xml">
   <style>
-    body{margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#FFFFFF;color:#1C2A2C;min-height:100vh;display:flex;align-items:center}
+    body{margin:0;font-family:"Helvetica Neue",Arial,sans-serif;background:#FFFFFF;color:#1E2526;min-height:100vh;display:flex;align-items:center}
     main{position:relative;padding:2.5rem 2rem;max-width:36rem;margin:2.5rem auto}
+    @media (max-width:42rem){main{margin:2.5rem 1.5rem}}
     main::before,main::after{content:"";position:absolute;pointer-events:none}
-    main::before{inset:0 -1.5rem;border-top:1px solid #0F525C;border-bottom:1px solid #0F525C}
-    main::after{inset:-1.5rem 0;border-left:1px solid #0F525C;border-right:1px solid #0F525C}
-    p.e{font-size:.8rem;font-weight:600;letter-spacing:.10em;text-transform:uppercase;color:#4B5B5C}
-    h1{font-weight:800;letter-spacing:-.025em;color:#083036;font-size:clamp(2.25rem,6vw,3.5rem);line-height:1.02;margin:.5rem 0 1rem}
-    a.b{display:inline-block;background:#0F525C;color:#FFFFFF;padding:.9rem 1.5rem;font-weight:600;text-decoration:none}
-    a.b:hover{background:#0B424A}
-    a:focus-visible{outline:2px solid #0F525C;outline-offset:3px}
+    main::before{inset:0 -1.5rem;border-top:1px solid #0B515B;border-bottom:1px solid #0B515B}
+    main::after{inset:-1.5rem 0;border-left:1px solid #0B515B;border-right:1px solid #0B515B}
+    p.e{font-size:.8rem;font-weight:600;letter-spacing:.10em;text-transform:uppercase;color:#515151}
+    h1{font-family:"Futura Now","Jost","Futura","Century Gothic","Helvetica Neue",Arial,sans-serif;font-weight:700;letter-spacing:-.015em;color:#083036;font-size:clamp(2.25rem,6vw,3.5rem);line-height:1.02;margin:.5rem 0 1rem}
+    a.b{display:inline-block;background:#0B515B;color:#FFFFFF;padding:.9rem 1.5rem;font-weight:600;text-decoration:none}
+    a.b:hover{background:#094550}
+    a:focus-visible{outline:2px solid #0B515B;outline-offset:3px}
     #logo{display:block;height:48px;width:auto;margin-bottom:2rem}
   </style>
 </head>
@@ -26,7 +28,7 @@
     <a id="logo-link" href="index.html"><img id="logo" src="assets/brand/arava-logo.svg" width="119" height="48" alt="Aravá Proyectos &amp; Construcciones · Inicio"></a>
     <p class="e">Error 404</p>
     <h1>Esta página no existe.</h1>
-    <p>Pero el Quindío sí. Vuelve al inicio.</p>
+    <p>Vuelve al inicio para ver nuestros proyectos.</p>
     <p><a class="b" id="home" href="index.html">Ir al inicio</a></p>
   </main>
   <script>
@@ -36,6 +38,7 @@
       var root = /\.github\.io$/.test(location.hostname) && seg.length ? "/" + seg[0] + "/" : "/";
       a.href = root; document.getElementById("logo-link").href = root;
       document.getElementById("logo").src = root + "assets/brand/arava-logo.svg";
+      document.getElementById("favicon").href = root + "favicon.svg";
     })();
   </script>
 </body>
