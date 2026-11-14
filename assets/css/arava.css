@@ -421,8 +421,20 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 /* Obras de Arquitectura Civil (Nosotros): línea de tiempo en filas; en escritorio, cuatro por fila sobre una línea de terreno */
 .ar-obras { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--ar-verde); }
 .ar-obra { position: relative; display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 1rem; padding: 1.125rem 0; border-bottom: 1px solid var(--ar-linea); }
-.ar-obra__img { grid-row: 1 / span 3; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; background: var(--ar-papel-3); }
-.ar-obra > :not(.ar-obra__img) { grid-column: 2; }
+/* Ilustración esquemática de cada obra (SVG de línea, trazo uniforme como los iconos Lucide).
+   Sustituye las fotos de baja resolución del PDF de la hoja de vida. Fondo blanco con retícula de puntos (patrón geométrico del Brandbook). */
+.ar-obra__fig { grid-row: 1 / span 3; aspect-ratio: 3 / 2; border: 1px solid var(--ar-linea); background-color: var(--ar-blanco); background-image: radial-gradient(circle, var(--ar-linea) .75px, transparent 1.25px); background-size: 10px 10px; background-position: 5px 5px; overflow: hidden; }
+.ar-obra__ilus { display: block; width: 100%; height: 100%; fill: none; stroke: var(--ar-verde); stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
+.ar-obra__ilus * { vector-effect: non-scaling-stroke; }
+.ar-obra__ilus .f { fill: var(--ar-blanco); }
+.ar-obra__ilus .s { stroke-opacity: .45; }
+.ar-obra__ilus .g { stroke-width: 1.5; }
+.ar-obra__ilus .a { stroke: var(--ar-teal); }
+.ar-obra__ilus .t { fill: var(--ar-verde-tinte); stroke: var(--ar-teal); }
+.ar-obra__ilus .w { fill: var(--ar-verde-tinte); stroke: var(--ar-teal); }
+.ar-obra__ilus .c { fill: var(--ar-aqua); fill-opacity: .35; stroke: var(--ar-teal); }
+.ar-obra__ilus .d { fill: none; stroke-opacity: .5; stroke-dasharray: 3 3; }
+.ar-obra > :not(.ar-obra__fig) { grid-column: 2; }
 .ar-obra__year { margin: 0 0 .125rem; font-family: var(--ar-font-display); font-weight: 600; font-size: 1.0625rem; line-height: 1.2; color: var(--ar-teal); font-variant-numeric: lining-nums; }
 .ar-obra h3 { margin: 0 0 .25rem; font-size: 1.125rem; line-height: 1.2; }
 .ar-obra__meta { margin: 0; font-size: var(--ar-fs-small); line-height: 1.45; color: var(--ar-tinta-suave); }
@@ -430,7 +442,7 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
   .ar-obras { grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 0; }
   .ar-obra { display: block; padding: 1.25rem 1.5rem 2rem 0; border-bottom: 0; border-top: 1px solid var(--ar-verde); }
   .ar-obra::before { content: ""; position: absolute; left: 0; top: -5px; width: 9px; height: 9px; background: var(--ar-papel-2); border: 1px solid var(--ar-verde); }
-  .ar-obra__img { margin: .5rem 0 1rem; }
+  .ar-obra__fig { margin: .5rem 0 1rem; }
   .ar-obra__year { font-size: 1.25rem; margin-bottom: .25rem; }
 }
 @media (min-width: 768px) { .ar-obras { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
