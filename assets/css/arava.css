@@ -388,6 +388,9 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 .ar-slot .ar-icon { width: 1.75rem; height: 1.75rem; margin: 0 0 .375rem; color: var(--ar-verde); }
 .ar-slot strong { color: var(--ar-verde-profundo); font-weight: 600; }
 .ar-slot p { margin: 0; font-size: var(--ar-fs-small); max-width: 28ch; }
+.ar-slot--on-dark { background: rgba(255, 255, 255, .06); border-color: var(--ar-ceniza); color: var(--ar-ceniza); }
+.ar-slot--on-dark .ar-icon { color: var(--ar-aqua); }
+.ar-slot--on-dark strong { color: var(--ar-claro); }
 .ar-preview-note { display: inline-block; margin: 0 0 1rem; padding: .25rem .625rem; border: 1px dashed var(--ar-borde); background: var(--ar-niebla-tinte); font-size: var(--ar-fs-label); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ar-niebla); }
 
 /* 9. Cuatro generaciones (Nosotros): cuatro volúmenes que suben, como en el dibujo de la cabecera */
