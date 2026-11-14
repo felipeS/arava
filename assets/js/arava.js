@@ -593,7 +593,8 @@
       return '<li class="ar-trust__item ar-trust__item--pending"><span class="ar-trust__statement">Cifra por confirmar con el equipo</span>' +
         '<span class="ar-eyebrow ar-trust__label">' + escapeHtml(f.label) + "</span></li>";
     }).join("");
-    list.style.setProperty("--ar-trust-cols", String(Math.min(5, list.children.length)));
+    var n = list.children.length;
+    list.style.setProperty("--ar-trust-cols", String(n > 5 ? 3 : n));
     section.hidden = false;
   }
 
