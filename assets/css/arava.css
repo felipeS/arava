@@ -447,6 +447,33 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
   .ar-awards__text { grid-column: 3; font-size: var(--ar-fs-body); }
 }
 
+/* Equipo: tira de retratos en Inicio y cuadrícula en Nosotros (sin nombres: no están confirmados) */
+.ar-equipo-tira { margin-top: 2.5rem; }
+.ar-equipo-tira__fotos, .ar-equipo { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.ar-equipo-tira__fotos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ar-equipo-tira__fotos img, .ar-equipo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: var(--ar-papel-3); }
+.ar-equipo-tira__pie { margin: .875rem 0 0; max-width: none; }
+.ar-equipo-tira__pie .ar-link-arrow { margin-left: .25rem; }
+@media (min-width: 768px) { .ar-equipo-tira__fotos { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .75rem; } }
+.ar-equipo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 576px) { .ar-equipo { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; } }
+@media (min-width: 992px) { .ar-equipo { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; } }
+.ar-equipo__marca { display: grid; place-items: center; aspect-ratio: 4 / 5; background: var(--ar-verde); }
+.ar-equipo .ar-equipo__marca img { width: 62%; height: auto; aspect-ratio: auto; object-fit: contain; background: none; }
+
+/* Galería de obra terminada: una foto ancha (3:2) y dos verticales (3:4) de la misma altura */
+.ar-galeria { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem .75rem; align-items: start; }
+.ar-galeria__item { margin: 0; }
+.ar-galeria__item img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; background: var(--ar-papel-3); }
+.ar-galeria__item--ancha { grid-column: 1 / -1; }
+.ar-galeria__item--ancha img { aspect-ratio: 3 / 2; }
+.ar-galeria .ar-caption { margin: .5rem 0 0; }
+@media (min-width: 768px) {
+  .ar-galeria { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); column-gap: 1rem; }
+  .ar-galeria--inv { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr); }
+  .ar-galeria__item--ancha { grid-column: auto; }
+}
+
 /* 10. Figuras */
 .ar-figure { margin: 0; }
 .ar-figure__frame { position: relative; overflow: hidden; background: var(--ar-papel-2); }
