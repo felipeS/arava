@@ -81,7 +81,7 @@ window.ARAVA_CONFIG = {
   },
 
   /* Versión del texto de autorización de datos enviada con cada registro. */
-  privacyPolicyVersion: "2026-11-borrador",
+  privacyPolicyVersion: "2026-11-14-borrador",
 
   /* Días que se conserva la atribución de campaña (UTM / fbclid). */
   attributionDays: 90
