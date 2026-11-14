@@ -450,14 +450,9 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
   .ar-awards__text { grid-column: 3; font-size: var(--ar-fs-body); }
 }
 
-/* Equipo: tira de retratos en Inicio y cuadrícula en Nosotros (sin nombres: no están confirmados) */
-.ar-equipo-tira { margin-top: 2.5rem; }
-.ar-equipo-tira__fotos, .ar-equipo { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
-.ar-equipo-tira__fotos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.ar-equipo-tira__fotos img, .ar-equipo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: var(--ar-papel-3); }
-.ar-equipo-tira__pie { margin: .875rem 0 0; max-width: none; }
-.ar-equipo-tira__pie .ar-link-arrow { margin-left: .25rem; }
-@media (min-width: 768px) { .ar-equipo-tira__fotos { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .75rem; } }
+/* Equipo: cuadrícula de retratos en Nosotros (sin nombres: no están confirmados) */
+.ar-equipo { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+.ar-equipo img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: var(--ar-papel-3); }
 .ar-equipo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (min-width: 576px) { .ar-equipo { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; } }
 @media (min-width: 992px) { .ar-equipo { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; } }
