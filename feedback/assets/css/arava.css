@@ -450,6 +450,28 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
   .ar-awards__text { grid-column: 3; font-size: var(--ar-fs-body); }
 }
 
+/* Premios en Inicio: versión compacta de la de Nosotros (premio, obra y año, sin detalle).
+   En escritorio, los cinco sobre una misma línea con un marcador por premio, como la línea de obras de Nosotros. */
+.ar-premios { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--ar-verde); border-bottom: 1px solid var(--ar-verde); }
+.ar-premio { display: grid; grid-template-columns: 5rem minmax(0, 1fr); column-gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--ar-linea); }
+.ar-premio:first-child { border-top: 0; }
+.ar-premio > * { grid-column: 2; margin: 0; }
+.ar-premio__year { grid-column: 1; grid-row: 1 / span 2; align-self: start; display: flex; align-items: center; gap: .375rem; font-family: var(--ar-font-display); font-weight: 600; font-size: 1.25rem; line-height: 1.2; color: var(--ar-teal); font-variant-numeric: lining-nums; }
+.ar-premio__year .ar-icon { margin: 0; width: 1.05em; height: 1.05em; }
+.ar-premio__name { font-size: 1.0625rem; line-height: 1.25; letter-spacing: 0; }
+.ar-premio__obra { margin-top: .25rem; font-size: var(--ar-fs-small); line-height: 1.45; color: var(--ar-tinta-suave); }
+@media (min-width: 576px) {
+  .ar-premios { grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 0; border-bottom: 0; }
+  .ar-premio { position: relative; display: block; padding: 1.25rem 1.5rem 1.75rem 0; border-top: 1px solid var(--ar-verde); }
+  .ar-premio:first-child { border-top: 1px solid var(--ar-verde); }
+  .ar-premio::before { content: ""; position: absolute; left: 0; top: -5px; width: 9px; height: 9px; background: var(--ar-papel); border: 1px solid var(--ar-verde); }
+  .ar-premio__year { margin-bottom: .5rem; font-size: 1.5rem; }
+  .ar-premio__name { font-size: 1.125rem; }
+  .ar-premio__obra { margin-top: .375rem; }
+}
+@media (min-width: 768px) { .ar-premios { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 992px) { .ar-premios { grid-template-columns: repeat(5, minmax(0, 1fr)); } .ar-premio { padding: 1.5rem 1.75rem 0 0; } }
+
 /* Equipo: cuadrícula de retratos, solo en Nosotros (sin nombres: no están confirmados).
    Los retratos mezclan fondo de estudio y de oficina; para que se lean como una sola serie,
    todos llevan el mismo recorte (rostro al 25 % del alto, alineado a la misma altura) y el mismo
@@ -459,7 +481,12 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 @media (min-width: 576px) { .ar-equipo { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; } }
 @media (min-width: 992px) { .ar-equipo { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; } }
 
-/* Galería de obra terminada: una foto ancha (3:2) y dos verticales (3:4) de la misma altura */
+/* Zonas sociales de Hito 18 (Proyectos): fotografías reales bajo la ficha del proyecto.
+   Galería: una foto ancha (3:2) y dos verticales (3:4) de la misma altura */
+.ar-zonas { margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--ar-linea); }
+.ar-zonas__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .375rem 2rem; margin-bottom: 1.5rem; }
+.ar-zonas__head h3, .ar-zonas__head p { margin: 0; }
+@media (min-width: 992px) { .ar-zonas { margin-top: 4.5rem; padding-top: 3.5rem; } .ar-zonas__head { margin-bottom: 2rem; } }
 .ar-galeria { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem .75rem; align-items: start; }
 .ar-galeria__item { margin: 0; }
 .ar-galeria__item img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; background: var(--ar-papel-3); }
@@ -468,7 +495,6 @@ a:hover > .ar-icon--arrow-up-right { transform: translate(2px, -2px); }
 .ar-galeria .ar-caption { margin: .5rem 0 0; }
 @media (min-width: 768px) {
   .ar-galeria { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); column-gap: 1rem; }
-  .ar-galeria--inv { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 2fr); }
   .ar-galeria__item--ancha { grid-column: auto; }
 }
 
