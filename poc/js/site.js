@@ -102,6 +102,17 @@
     show(0);
   }
 
+  /* Reconocimientos: en táctil queda a color el último premio tocado */
+  document.querySelectorAll('.awardsRow').forEach(function (row) {
+    var awards = row.querySelectorAll('.award');
+    awards.forEach(function (award) {
+      award.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'mouse') return;
+        awards.forEach(function (other) { other.classList.toggle('is-active', other === award); });
+      }, { passive: true });
+    });
+  });
+
   /* Carrusel de obras */
   document.querySelectorAll('.carousel').forEach(function (car) {
     var track = car.querySelector('.track');

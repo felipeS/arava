@@ -476,41 +476,25 @@ strong { font-weight: 700; }
 .awards .intro { max-width: 600px; margin: 0 auto 72px; text-align: center; }
 .awards .intro p { margin-top: 18px; font-size: 16px; color: #444; }
 .awardsRow { display: grid; grid-template-columns: repeat(5, 1fr); }
-.award {
-  --seal: #b9bcbf;
-  --seal-ink: #8b8e92;
-  --seal-disc: #f4f5f6;
-  padding: 6px 18px 4px;
-  text-align: center;
-  border-left: 1px solid var(--line);
-}
+.award { display: flex; flex-direction: column; padding: 6px 20px 4px; text-align: center; border-left: 1px solid var(--line); }
 .award:first-child { border-left: 0; }
-.award .seal { display: grid; place-items: center; }
-.sealArt { width: 100%; max-width: 184px; height: auto; overflow: visible; transition: transform 0.5s ease; }
-.sealArt .ring { fill: none; stroke: var(--seal); stroke-width: 1; transition: stroke 0.4s; }
-.sealArt .ticks {
-  fill: none;
-  stroke: var(--seal);
-  stroke-width: 5;
-  stroke-dasharray: 1 4.6549;
-  transform-origin: 100px 100px;
-  transition: stroke 0.4s, transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+.awardMark { display: flex; flex: none; align-items: center; justify-content: center; height: 120px; }
+.awardMark img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.82;
+  transition: filter 0.45s ease, opacity 0.45s ease, transform 0.5s ease;
 }
-.sealArt .legend { font-family: "Gantari", sans-serif; font-size: 9.5px; font-weight: 500; fill: var(--seal-ink); transition: fill 0.4s; }
-.sealArt .disc { fill: var(--seal-disc); stroke: var(--seal); stroke-width: 1; transition: fill 0.4s, stroke 0.4s; }
-.sealArt .glyph { fill: none; stroke: var(--seal-ink); stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.4s; }
-.award .year {
-  display: block;
-  margin: 28px -14px 0 0;
-  font-family: "Gantari", sans-serif;
-  font-size: 32px;
-  font-weight: 200;
-  line-height: 1;
-  letter-spacing: 14px;
-  transition: color 0.4s;
-}
+/* El símbolo cuadrado y macizo pesa más que los objetos: se compensa ópticamente. */
+.awardMark.square img { max-height: 90%; }
+/* El lockup horizontal no debe ocupar todo el ancho de la columna. */
+.awardMark.wide img { max-width: 80%; }
 .award h3 {
-  margin-top: 18px;
+  margin-top: 30px;
   font-family: "Gantari", sans-serif;
   font-size: 12.5px;
   font-weight: 500;
@@ -518,18 +502,24 @@ strong { font-weight: 700; }
   letter-spacing: 2.2px;
   text-transform: uppercase;
 }
-.award h3::before { content: ""; display: block; width: 26px; height: 1px; margin: 0 auto 16px; background: var(--seal); transition: background-color 0.4s, width 0.4s; }
 .award .obra { margin-top: 8px; font-size: 13px; font-weight: 400; color: var(--muted); line-height: 1.45; }
-.award:hover { --seal: var(--teal); --seal-ink: var(--teal); --seal-disc: var(--teal); }
-.award:hover .sealArt { transform: translateY(-4px); }
-.award:hover .sealArt .ticks { transform: rotate(36deg); }
-.award:hover .sealArt .glyph { stroke: #fff; }
-.award:hover .year { color: var(--teal); }
-.award:hover h3::before { width: 44px; }
-@media (hover: none) {
-  .award { --seal: var(--teal); --seal-ink: var(--teal); --seal-disc: var(--teal); }
-  .award .sealArt .glyph { stroke: #fff; }
+.award .year {
+  display: block;
+  margin-top: auto;
+  padding-top: 14px;
+  font-family: "Gantari", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: var(--muted);
+  transition: color 0.4s;
 }
+.award:hover .awardMark img,
+.award:focus-within .awardMark img,
+.award.is-active .awardMark img { filter: grayscale(0); opacity: 1; }
+.award:hover .awardMark img { transform: translateY(-4px); }
+.award:hover .year,
+.award.is-active .year { color: var(--teal); }
 
 /* ---------- Fichas tipográficas (obras sin fotografía) ---------- */
 .cardObra.noPhoto {
@@ -796,12 +786,12 @@ footer {
     border-left: 0;
     border-top: 1px solid var(--line);
   }
-  .award .seal { grid-row: 1 / 4; align-self: center; }
-  .award .year { margin: 0; font-size: 26px; letter-spacing: 9px; align-self: end; }
-  .award h3 { margin-top: 10px; font-size: 12px; letter-spacing: 1.8px; }
-  .award h3::before { content: none; }
+  .awardMark { grid-row: 1 / 4; align-self: center; height: 92px; }
+  .award h3 { margin-top: 0; font-size: 12px; letter-spacing: 1.8px; align-self: end; }
   .award .obra { margin-top: 5px; }
-  .award:hover .sealArt { transform: none; }
+  .award .year { margin-top: 0; padding-top: 8px; }
+  .awardMark.wide img { max-width: 100%; }
+  .award:hover .awardMark img { transform: none; }
 
   .cardObra.noPhoto { padding: 20px 22px; }
   .cardObra.noPhoto .name { font-size: 18px; }
