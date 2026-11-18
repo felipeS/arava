@@ -411,6 +411,7 @@ strong { font-weight: 700; }
 .metrics:hover { background: var(--ink); color: #fff; }
 .metrics:hover svg { color: var(--sage); }
 .metrics:hover .label { color: #fff; }
+.metricsGrid.three { grid-template-columns: repeat(3, 1fr); max-width: 1020px; margin-left: auto; margin-right: auto; }
 
 /* ---------- Carrusel de obras ---------- */
 .explore { padding: 96px 0 40px; overflow: hidden; }
@@ -471,36 +472,123 @@ strong { font-weight: 700; }
 .explore .more { text-align: center; margin-top: 44px; }
 
 /* ---------- Reconocimientos ---------- */
-.awards { padding: 80px 0 110px; }
-.awards .intro { max-width: 600px; margin: 0 auto 64px; }
+.awards { padding: 96px 0 120px; }
+.awards .intro { max-width: 600px; margin: 0 auto 72px; text-align: center; }
 .awards .intro p { margin-top: 18px; font-size: 16px; color: #444; }
-.awardsRow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; }
-.award { text-align: center; }
-.award .seal {
-  height: 140px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 14px;
-  background: #fafafa;
-  border-radius: var(--radius);
-  color: #9a9da0;
-  transition: color 0.3s, background-color 0.3s;
+.awardsRow { display: grid; grid-template-columns: repeat(5, 1fr); }
+.award {
+  --seal: #b9bcbf;
+  --seal-ink: #8b8e92;
+  --seal-disc: #f4f5f6;
+  padding: 6px 18px 4px;
+  text-align: center;
+  border-left: 1px solid var(--line);
 }
-.award .seal svg { width: 84px; height: 84px; transition: transform 0.3s; }
-.award h3 { font-family: "Open Sans", sans-serif; font-size: 13px; font-weight: 400; line-height: 1.4; }
-.award .obra { margin-top: 4px; font-size: 12.5px; font-weight: 400; color: var(--muted); line-height: 1.4; }
+.award:first-child { border-left: 0; }
+.award .seal { display: grid; place-items: center; }
+.sealArt { width: 100%; max-width: 184px; height: auto; overflow: visible; transition: transform 0.5s ease; }
+.sealArt .ring { fill: none; stroke: var(--seal); stroke-width: 1; transition: stroke 0.4s; }
+.sealArt .ticks {
+  fill: none;
+  stroke: var(--seal);
+  stroke-width: 5;
+  stroke-dasharray: 1 4.6549;
+  transform-origin: 100px 100px;
+  transition: stroke 0.4s, transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.sealArt .legend { font-family: "Gantari", sans-serif; font-size: 9.5px; font-weight: 500; fill: var(--seal-ink); transition: fill 0.4s; }
+.sealArt .disc { fill: var(--seal-disc); stroke: var(--seal); stroke-width: 1; transition: fill 0.4s, stroke 0.4s; }
+.sealArt .glyph { fill: none; stroke: var(--seal-ink); stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.4s; }
 .award .year {
   display: block;
-  margin: 12px -10px 0 0;
+  margin: 28px -14px 0 0;
   font-family: "Gantari", sans-serif;
-  font-size: 17px;
-  font-weight: 300;
-  letter-spacing: 10px;
-  transition: color 0.3s;
+  font-size: 32px;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: 14px;
+  transition: color 0.4s;
 }
-.award:hover .seal { color: var(--teal); background: #eef3f2; }
-.award:hover .seal svg { transform: scale(1.08); }
+.award h3 {
+  margin-top: 18px;
+  font-family: "Gantari", sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+}
+.award h3::before { content: ""; display: block; width: 26px; height: 1px; margin: 0 auto 16px; background: var(--seal); transition: background-color 0.4s, width 0.4s; }
+.award .obra { margin-top: 8px; font-size: 13px; font-weight: 400; color: var(--muted); line-height: 1.45; }
+.award:hover { --seal: var(--teal); --seal-ink: var(--teal); --seal-disc: var(--teal); }
+.award:hover .sealArt { transform: translateY(-4px); }
+.award:hover .sealArt .ticks { transform: rotate(36deg); }
+.award:hover .sealArt .glyph { stroke: #fff; }
 .award:hover .year { color: var(--teal); }
+.award:hover h3::before { width: 44px; }
+@media (hover: none) {
+  .award { --seal: var(--teal); --seal-ink: var(--teal); --seal-disc: var(--teal); }
+  .award .sealArt .glyph { stroke: #fff; }
+}
+
+/* ---------- Fichas tipográficas (obras sin fotografía) ---------- */
+.cardObra.noPhoto {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 26px;
+  background-color: var(--ink);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='84' fill='none' stroke='%23ffffff' stroke-opacity='.13' stroke-width='1'%3E%3Cpath d='M0 83.5h240M8 84V30h34v54M14 38h8v8h-8zM28 38h8v8h-8zM14 54h8v8h-8zM28 54h8v8h-8zM14 70h8v8h-8zM28 70h8v8h-8zM50 84V12h28v72M56 20h16M56 28h16M56 36h16M56 44h16M56 52h16M56 60h16M56 68h16M56 76h16M86 84V44l20-12 20 12v40M96 52h20v32H96zM106 52v32M134 84V22h40v62M134 34h40M134 46h40M134 58h40M134 70h40M147 22v62M161 22v62M182 84V50h22v34M188 58h10M188 66h10M188 74h10M212 84V36h22v48M218 44h4v6h-4zM226 44h4v6h-4zM218 58h4v6h-4zM226 58h4v6h-4zM218 72h4v6h-4zM226 72h4v6h-4z'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: left bottom;
+}
+.cardObra.noPhoto::after { content: none; }
+.cardObra .idx { font-family: "Gantari", sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--sage); }
+.cardObra .idx::after { content: ""; display: block; width: 28px; height: 1px; margin-top: 14px; background: var(--sage); opacity: 0.6; }
+.cardObra.noPhoto .name { position: static; margin-top: 16px; font-size: 21px; font-weight: 300; line-height: 1.3; }
+.cardObra.noPhoto .name small { margin-top: 8px; font-size: 13px; }
+.obrasGrid.typo { grid-template-columns: repeat(4, 1fr); margin-top: 36px; }
+.obrasGrid.typo .cardObra { aspect-ratio: 4 / 3; padding: 20px 20px; background-size: auto 60px; }
+.obrasGrid.typo .cardObra .name { font-size: 15.5px; letter-spacing: 2.4px; margin-top: 14px; }
+.subhead { margin-top: 88px; }
+.cardObra.cta { padding: 0; background-color: var(--teal); background-image: none; transition: background-color 0.25s; }
+.cardObra.cta:hover { background-color: #0b434b; }
+.cardObra.cta a { position: relative; display: flex; flex-direction: column; height: 100%; padding: 20px; }
+.cardObra.cta svg { position: absolute; right: 18px; bottom: 18px; width: 26px; height: 26px; transition: transform 0.25s; }
+.cardObra.cta:hover svg { transform: translate(3px, -3px); }
+
+/* ---------- Compra desde el exterior ---------- */
+.abroad { margin-top: 56px; padding: 104px 0; background: var(--ink); color: #fff; }
+.abroadGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: center; }
+.abroad .eyebrow { color: var(--sage); }
+.abroad .title { transform-origin: left; }
+.abroad .text { margin-top: 18px; max-width: 480px; font-size: 16px; color: #d9d9d9; }
+.abroad .btn { min-width: 190px; }
+.abroadSteps { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, 0.22); }
+.abroadSteps li { display: flex; gap: 28px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.22); }
+.abroadSteps .n { flex: none; width: 56px; font-family: "Gantari", sans-serif; font-weight: 200; font-size: 36px; line-height: 1; letter-spacing: 2px; color: var(--sage); }
+.abroadSteps h3 { font-family: "Gantari", sans-serif; font-weight: 400; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; }
+.abroadSteps p { margin-top: 6px; font-size: 14.5px; color: #cfcfcf; }
+ol.steps { list-style: none; padding: 0; }
+.link { border-bottom: 1px solid currentColor; transition: color 0.2s; }
+.link:hover { color: var(--teal); }
+.buyGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
+.buyCard { display: flex; flex-direction: column; background: #fff; border-radius: var(--radius); overflow: hidden; }
+.buyCard .media { aspect-ratio: 16 / 9; overflow: hidden; }
+.buyCard .media img { width: 100%; height: 100%; object-fit: cover; }
+.buyCard .body { display: flex; flex-direction: column; flex: 1; padding: 34px 36px 36px; }
+.buyCard .title { font-size: 27px; transform-origin: left; }
+.buyCard .facts li b { width: 96px; }
+.buyCard .actions { margin-top: auto; padding-top: 28px; }
+.finePrint { max-width: 720px; margin: 32px auto 0; text-align: center; font-size: 13.5px; color: var(--muted); }
+.actions.center { justify-content: center; }
+.notice + .notice { margin-top: 14px; }
+
+/* ---------- Equipo ---------- */
+.team { padding-top: 0; }
+.teamGrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 52px; }
+.teamGrid li { aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--radius); background: #e9ecee; }
+.teamGrid img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.teamGrid li:hover img { transform: scale(1.04); }
 
 /* ---------- Footer ---------- */
 footer {
@@ -642,7 +730,7 @@ footer {
   .footGrid > :last-child { grid-column: 1 / -1; }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 1240px) {
   .mainNav, .btnWsp { display: none; }
   .burger { display: flex; }
 }
@@ -683,6 +771,10 @@ footer {
   .metrics svg { width: 46px; height: 46px; }
   .metrics .cifra { font-size: 34px; }
   .metrics .label { font-size: 14px; }
+  .metricsGrid.three { gap: 4px; }
+  .metricsGrid.three .metrics { padding: 20px 4px; }
+  .metricsGrid.three .cifra { font-size: 30px; letter-spacing: 2px; }
+  .metricsGrid.three .label { font-size: 12.5px; line-height: 1.4; }
 
   .explore { padding: 64px 0 20px; }
   .explore .head { margin-bottom: 36px; }
@@ -691,11 +783,46 @@ footer {
   .cardObra { width: 84vw; }
   .carouselNav button { width: 44px; height: 44px; }
 
-  .awards { padding: 56px 0 72px; }
-  .awards .intro { margin: 0 0 36px; text-align: left; }
-  .awardsRow { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
-  .award .seal { height: 116px; }
-  .award .seal svg { width: 68px; height: 68px; }
+  .awards { padding: 64px 0 72px; }
+  .awards .intro { margin: 0 0 28px; text-align: left; }
+  .awardsRow { grid-template-columns: 1fr; }
+  .award {
+    display: grid;
+    grid-template-columns: 112px 1fr;
+    column-gap: 22px;
+    align-content: center;
+    padding: 22px 0;
+    text-align: left;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .award .seal { grid-row: 1 / 4; align-self: center; }
+  .award .year { margin: 0; font-size: 26px; letter-spacing: 9px; align-self: end; }
+  .award h3 { margin-top: 10px; font-size: 12px; letter-spacing: 1.8px; }
+  .award h3::before { content: none; }
+  .award .obra { margin-top: 5px; }
+  .award:hover .sealArt { transform: none; }
+
+  .cardObra.noPhoto { padding: 20px 22px; }
+  .cardObra.noPhoto .name { font-size: 18px; }
+  .obrasGrid.typo { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 28px; }
+  .obrasGrid.typo .cardObra { aspect-ratio: 1; padding: 16px; background-size: auto 44px; }
+  .obrasGrid.typo .cardObra .name { font-size: 12.5px; letter-spacing: 1.6px; }
+  .obrasGrid.typo .cardObra .name small { font-size: 12px; }
+  .cardObra.cta a { padding: 16px; }
+  .cardObra.cta svg { top: 14px; right: 14px; bottom: auto; width: 22px; height: 22px; }
+  .subhead { margin-top: 60px; }
+
+  .abroad { margin-top: 36px; padding: 64px 0; }
+  .abroadGrid { grid-template-columns: 1fr; gap: 40px; }
+  .abroadSteps li { gap: 16px; padding: 20px 0; }
+  .abroadSteps .n { width: 46px; font-size: 30px; }
+  .buyGrid { grid-template-columns: 1fr; margin-top: 36px; }
+  .buyCard .body { padding: 26px 22px 28px; }
+  .buyCard .title { font-size: 24px; }
+
+  .teamGrid { grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 32px; }
+  .teamGrid li { border-radius: 10px; }
 
   footer { padding-top: 60px; }
   .footGrid { grid-template-columns: 1fr; gap: 34px; }
