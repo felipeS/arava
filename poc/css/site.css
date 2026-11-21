@@ -383,6 +383,7 @@ strong { font-weight: 700; }
 
 /* ---------- Experiencia ---------- */
 .section { padding: 96px 0; }
+.section[id] { scroll-margin-top: 20px; }
 .experience { padding: 48px 0 96px; }
 .experience .mark { width: 260px; margin: 0 auto 14px; }
 .experience .lead { margin-top: 10px; }
@@ -570,8 +571,64 @@ ol.steps { list-style: none; padding: 0; }
 .buyCard .facts li b { width: 96px; }
 .buyCard .actions { margin-top: auto; padding-top: 28px; }
 .finePrint { max-width: 720px; margin: 32px auto 0; text-align: center; font-size: 13.5px; color: var(--muted); }
-.actions.center { justify-content: center; }
-.notice + .notice { margin-top: 14px; }
+.nowrap { white-space: nowrap; }
+
+/* ---------- WhatsApp de ventas ---------- */
+.wspBlock {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 36px 64px;
+  align-items: center;
+  padding: 64px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: #fff;
+}
+.wspBlock .eyebrow { color: var(--sage); }
+.wspBlock .title { transform-origin: left; }
+.wspBlock .text { margin-top: 16px; max-width: 480px; font-size: 16px; color: #d9d9d9; }
+.wspReach { display: flex; flex-direction: column; align-items: flex-start; gap: 26px; }
+.wspNumber {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: "Gantari", sans-serif;
+  font-size: 42px;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+.wspNumber svg { flex: none; width: 36px; height: 36px; color: var(--sage); }
+.wspBlock .btn { min-width: 260px; }
+
+/* ---------- Salas de ventas ---------- */
+.salesGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
+.salesCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 44px 44px 40px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+.salesCard > svg { width: 44px; height: 44px; margin-bottom: 26px; color: var(--teal); }
+.salesCard .title { font-size: 25px; transform-origin: left; }
+.salesCard address {
+  margin-top: 22px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-style: normal;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+.salesCard address span { display: block; }
+.salesCard address .ref { margin-top: 4px; font-size: 15px; font-weight: 300; color: var(--muted); }
+.salesCard .actions { margin-top: auto; padding-top: 30px; }
+.salesCard .btn { min-width: 190px; }
 
 /* ---------- Equipo ---------- */
 .team { padding-top: 0; }
@@ -626,10 +683,14 @@ footer {
   letter-spacing: 4px;
   text-transform: uppercase;
   transform: scaleY(0.85);
+  white-space: nowrap;
   transition: color 0.25s;
 }
 .footContact a.big:hover { color: var(--sage); }
 .footContact .note { font-size: 13px; color: #b5b5b5; }
+.footContact .note svg { display: inline-block; width: 16px; height: 16px; margin-right: 6px; vertical-align: -3px; color: var(--sage); }
+.footContact .note a { color: #e1e1e1; border-bottom: 1px solid rgba(255, 255, 255, 0.3); transition: color 0.2s, border-color 0.2s; }
+.footContact .note a:hover { color: #fff; border-color: #fff; }
 .footProjects { padding: 44px 0 40px; text-align: center; }
 .footProjects h2 { font-family: "Gantari", sans-serif; font-size: 15px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 26px; }
 .footProjects .pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
@@ -685,17 +746,6 @@ footer {
 .steps h3 { font-family: "Gantari", sans-serif; font-weight: 400; font-size: 14px; letter-spacing: 3px; text-transform: uppercase; margin: 4px 0 6px; }
 .steps p { font-size: 14.5px; color: #444; }
 
-.notice {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 44px 40px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: #fff;
-  text-align: center;
-}
-.notice svg { width: 44px; height: 44px; margin: 0 auto 16px; color: var(--teal); }
-.notice p { margin-top: 12px; font-size: 16px; color: #3c3c3c; }
 .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 56px; }
 .duo .cardProject { height: 420px; border-radius: var(--radius); }
 .duo .cardProject .logoProject { width: 220px; }
@@ -718,6 +768,7 @@ footer {
   .cardObra { width: 360px; }
   .footGrid { grid-template-columns: 1fr 1fr; }
   .footGrid > :last-child { grid-column: 1 / -1; }
+  .wspBlock { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 1240px) {
@@ -811,6 +862,18 @@ footer {
   .buyCard .body { padding: 26px 22px 28px; }
   .buyCard .title { font-size: 24px; }
 
+  .wspBlock { gap: 28px; padding: 36px 20px; }
+  .wspReach { align-items: stretch; gap: 22px; }
+  .wspNumber { font-size: clamp(20px, 6.8vw, 34px); letter-spacing: 1px; gap: 10px; }
+  .wspNumber svg { width: 26px; height: 26px; }
+  .wspBlock .btn { width: 100%; min-width: 0; }
+  .salesGrid { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
+  .salesCard { padding: 30px 22px 26px; }
+  .salesCard > svg { width: 38px; height: 38px; margin-bottom: 20px; }
+  .salesCard .title { font-size: 22px; }
+  .salesCard address { padding: 16px 0; font-size: 16.5px; }
+  .salesCard .actions { padding-top: 22px; }
+
   .teamGrid { grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 32px; }
   .teamGrid li { border-radius: 10px; }
 
@@ -818,7 +881,9 @@ footer {
   .footGrid { grid-template-columns: 1fr; gap: 34px; }
   .footGrid > :last-child { grid-column: auto; }
   .footGrid .cols2 { column-gap: 20px; }
-  .footContact a.big { font-size: 38px; letter-spacing: 3px; }
+  .footContact a.big { font-size: clamp(22px, 7.6vw, 38px); letter-spacing: 2px; }
+  .footContact .note .sep { display: none; }
+  .footContact .note a { display: table; margin: 8px auto 0; }
   .footProjects .pills { flex-direction: column; align-items: center; }
   .footBottom { text-align: center; letter-spacing: 1.2px; line-height: 1.7; }
 
@@ -833,7 +898,6 @@ footer {
   .steps li { padding-bottom: 14px; }
   .duo { grid-template-columns: 1fr; margin-top: 36px; }
   .duo .cardProject { height: 320px; }
-  .notice { padding: 32px 22px; }
   .facts li b { width: 104px; }
   .actions .btn { width: 100%; }
 }
