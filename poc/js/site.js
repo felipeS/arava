@@ -20,6 +20,7 @@
   var burger = document.querySelector('.burger');
   function setMenu(open) {
     menu.classList.toggle('open', open);
+    doc.classList.toggle('menu-open', open);
     burger.setAttribute('aria-expanded', String(open));
     document.body.style.overflow = open ? 'hidden' : '';
     if (open) menu.querySelector('.close').focus();
@@ -31,6 +32,7 @@
     menu.addEventListener('click', function (e) {
       if (e.target.closest('a')) {
         menu.classList.remove('open');
+        doc.classList.remove('menu-open');
         document.body.style.overflow = '';
         burger.setAttribute('aria-expanded', 'false');
       }
@@ -168,5 +170,42 @@
     items.forEach(function (el) { io.observe(el); });
   } else {
     items.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* WhatsApp flotante: se oculta mientras taparía un enlace o botón del contenido
+     (CTAs del hero, botones de las tarjetas…) o el footer, que ya trae el WhatsApp grande.
+     El observador vigila solo el recuadro del botón (más 8 px de margen) en la esquina. */
+  var fab = document.querySelector('.wspFloat');
+  if (fab && 'IntersectionObserver' in window) {
+    var guards = [].slice.call(document.querySelectorAll('main a, main button, footer')).filter(function (el) { return el !== fab; });
+    var hits = [];
+    var io = null;
+    var resizeTimer = null;
+    /* rootMargin negativo que reduce el viewport al recuadro del botón en reposo
+       (right/bottom calculados no dependen del transform de .is-hidden). */
+    function zone() {
+      var cs = getComputedStyle(fab);
+      var pad = 8;
+      var right = Math.max(0, parseFloat(cs.right) - pad);
+      var bottom = Math.max(0, parseFloat(cs.bottom) - pad);
+      var top = Math.max(0, window.innerHeight - bottom - fab.offsetHeight - 2 * pad);
+      var left = Math.max(0, doc.clientWidth - right - fab.offsetWidth - 2 * pad);
+      return -top + 'px ' + -right + 'px ' + -bottom + 'px ' + -left + 'px';
+    }
+    function watch() {
+      if (io) io.disconnect();
+      hits = guards.map(function () { return false; });
+      io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { hits[guards.indexOf(e.target)] = e.isIntersecting; });
+        fab.classList.toggle('is-hidden', hits.indexOf(true) !== -1);
+      }, { rootMargin: zone() });
+      guards.forEach(function (el) { io.observe(el); });
+    }
+    fab.classList.add('is-hidden');
+    watch();
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(watch, 150);
+    });
   }
 })();

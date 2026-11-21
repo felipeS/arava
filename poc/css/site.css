@@ -709,6 +709,46 @@ footer {
 .boxProyect:hover { background: var(--sage); }
 .footBottom { padding-top: 24px; font-size: 13px; letter-spacing: 2.4px; color: #d0d0d0; }
 
+/* ---------- WhatsApp flotante ---------- */
+/* Disco teal con aro blanco: el teal contrasta sobre fondos claros y el aro sobre los oscuros.
+   site.js le pone .is-hidden mientras taparía un enlace o botón del contenido, o el footer;
+   con el menú móvil abierto (.menu-open) sale de la vista y del orden de foco. */
+.wspFloat {
+  position: fixed;
+  z-index: 45;
+  right: calc(28px + env(safe-area-inset-right, 0px));
+  bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  background: var(--teal);
+  color: #fff;
+  box-shadow: 0 12px 28px -10px rgba(15, 82, 92, 0.6), 0 2px 8px rgba(36, 36, 36, 0.18);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, background-color 0.25s, box-shadow 0.25s;
+}
+.wspFloat svg { width: 28px; height: 28px; }
+.wspFloat:hover {
+  background: #0b434b;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px -10px rgba(15, 82, 92, 0.7), 0 3px 10px rgba(36, 36, 36, 0.2);
+}
+.wspFloat:active { transform: scale(0.96); }
+/* Foco en dos tonos: el aro blanco se ve sobre fondos oscuros y el contorno teal sobre los claros. */
+.wspFloat:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px #fff, 0 12px 28px -10px rgba(15, 82, 92, 0.6);
+}
+.wspFloat.is-hidden,
+.menu-open .wspFloat { opacity: 0; transform: translateY(12px) scale(0.9); pointer-events: none; }
+.menu-open .wspFloat { visibility: hidden; }
+/* Oculto sigue en el orden de tabulación: si recibe el foco por teclado, aparece. */
+.wspFloat.is-hidden:focus-visible { opacity: 1; transform: none; pointer-events: auto; }
+@media print { .wspFloat { display: none; } }
+
 /* ---------- Páginas internas ---------- */
 .pageHero {
   position: relative;
@@ -759,6 +799,7 @@ footer {
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
   .v-slide img, .v-slide video { transform: none; transition: none; }
+  .wspFloat, .wspFloat:hover, .wspFloat:active, .wspFloat.is-hidden, .menu-open .wspFloat { transform: none; }
 }
 
 /* ---------- Responsive ---------- */
@@ -774,6 +815,14 @@ footer {
 @media (max-width: 1240px) {
   .mainNav, .btnWsp { display: none; }
   .burger { display: flex; }
+}
+
+/* Tablet: con el padding y el tracking de escritorio, las palabras largas de los premios
+   («RECONOCIMIENTO») no caben en 5 columnas y la fila desbordaba entre 769 y 850 px. */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .award { padding: 6px 12px 4px; }
+  .award h3 { font-size: 12px; letter-spacing: 1.6px; }
+  .award .obra { font-size: 12.5px; }
 }
 
 @media (max-width: 768px) {
@@ -886,6 +935,14 @@ footer {
   .footContact .note a { display: table; margin: 8px auto 0; }
   .footProjects .pills { flex-direction: column; align-items: center; }
   .footBottom { text-align: center; letter-spacing: 1.2px; line-height: 1.7; }
+
+  .wspFloat {
+    right: calc(16px + env(safe-area-inset-right, 0px));
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    width: 56px;
+    height: 56px;
+  }
+  .wspFloat svg { width: 26px; height: 26px; }
 
   .pageHero { height: 56vh; min-height: 380px; }
   .pageHero h1 { font-size: 30px; letter-spacing: 3px; }
