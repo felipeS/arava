@@ -11,6 +11,14 @@
   --muted: #6b6f73;
   --radius: 14px;
   --wrap: 1320px;
+  /* Verde WhatsApp. El oficial #25D366 con blanco encima da 1,98:1: no llega ni al 3:1 de un ícono
+     (WCAG 1.4.11) ni al 4,5:1 de un texto (1.4.3). Se usa tal cual solo como color de ícono sobre carbón
+     (7,83:1) y, donde lleva blanco encima, se oscurece el mismo tono (HSL 142°, 70 %). */
+  --wa: #25d366;
+  --wa-fab: #1ca14e;        /* disco del botón flotante: ícono blanco 3,36:1 */
+  --wa-fab-hover: #198f45;  /* 4,15:1 */
+  --wa-btn: #17823f;        /* botones con texto blanco: 4,88:1; como texto sobre blanco, 4,88:1 */
+  --wa-btn-hover: #136c34;  /* 6,52:1 */
 }
 
 *,
@@ -36,7 +44,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 h1, h2, h3, h4, h5, h6, p { margin: 0; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 :focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
-.on-dark :focus-visible, .mainHeader:not(.white) :focus-visible, footer :focus-visible { outline-color: #fff; }
+.on-dark :focus-visible, .mainHeader:not(.white) :focus-visible, footer :focus-visible,
+.abroad :focus-visible, .wspBlock :focus-visible { outline-color: #fff; }
 
 .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
 .bg-light { background: var(--light); }
@@ -90,6 +99,12 @@ strong { font-weight: 700; }
 .btnLine { border-color: var(--ink); color: var(--ink); }
 .btnLine:hover { background: var(--ink); color: #fff; }
 .btn svg { width: 16px; height: 16px; flex: none; }
+/* WhatsApp: relleno (acción principal) y contorno (secundaria, en las tarjetas de salas). */
+.btnWhatsapp { background: var(--wa-btn); border-color: var(--wa-btn); color: #fff; }
+.btnWhatsapp:hover { background: var(--wa-btn-hover); border-color: var(--wa-btn-hover); }
+.btnWhatsappLine { border-color: var(--wa-btn); color: var(--wa-btn); }
+.btnWhatsappLine:hover { background: var(--wa-btn); color: #fff; }
+.btnWhatsapp svg, .btnWhatsappLine svg { width: 18px; height: 18px; }
 
 /* ---------- Header de vidrio ---------- */
 .mainHeader {
@@ -599,21 +614,40 @@ ol.steps { list-style: none; padding: 0; }
   letter-spacing: 2px;
   white-space: nowrap;
 }
-.wspNumber svg { flex: none; width: 36px; height: 36px; color: var(--sage); }
+.wspNumber svg { flex: none; width: 34px; height: 34px; color: var(--wa); }
 .wspBlock .btn { min-width: 260px; }
 
 /* ---------- Salas de ventas ---------- */
+/* Cada tarjeta abre con una imagen (.salesMedia). Hoy son renders de los proyectos, no fotos de las salas:
+   llevan la etiqueta «Imagen ilustrativa». La imagen de cada sala vive en un solo archivo,
+   assets/salas/tarjeta-<ciudad>.webp, que usan contacto y compra desde el exterior (ver README). */
 .salesGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; }
 .salesCard {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 44px 44px 40px;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: #fff;
 }
-.salesCard > svg { width: 44px; height: 44px; margin-bottom: 26px; color: var(--teal); }
+.salesMedia { position: relative; margin: 0; aspect-ratio: 16 / 9; overflow: hidden; background: #e9ecee; }
+.salesMedia img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 65%; }
+/* Etiqueta sobre la foto: blanco sobre carbón al 78 %; aun con un píxel blanco debajo da 7,55:1. */
+.salesMedia figcaption {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 3px 11px;
+  border-radius: 90px;
+  background: rgba(36, 36, 36, 0.78);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+}
+.salesBody { display: flex; flex-direction: column; flex: 1; padding: 34px 36px 38px; }
 .salesCard .title { font-size: 25px; transform-origin: left; }
 .salesCard address {
   margin-top: 22px;
@@ -628,7 +662,7 @@ ol.steps { list-style: none; padding: 0; }
 .salesCard address span { display: block; }
 .salesCard address .ref { margin-top: 4px; font-size: 15px; font-weight: 300; color: var(--muted); }
 .salesCard .actions { margin-top: auto; padding-top: 30px; }
-.salesCard .btn { min-width: 190px; }
+.salesCard .btn { flex: 1 1 190px; min-width: 190px; }
 
 /* ---------- Equipo ---------- */
 .team { padding-top: 0; }
@@ -688,7 +722,7 @@ footer {
 }
 .footContact a.big:hover { color: var(--sage); }
 .footContact .note { font-size: 13px; color: #b5b5b5; }
-.footContact .note svg { display: inline-block; width: 16px; height: 16px; margin-right: 6px; vertical-align: -3px; color: var(--sage); }
+.footContact .note svg { display: inline-block; width: 16px; height: 16px; margin-right: 7px; vertical-align: -3px; color: var(--wa); }
 .footContact .note a { color: #e1e1e1; border-bottom: 1px solid rgba(255, 255, 255, 0.3); transition: color 0.2s, border-color 0.2s; }
 .footContact .note a:hover { color: #fff; border-color: #fff; }
 .footProjects { padding: 44px 0 40px; text-align: center; }
@@ -710,7 +744,8 @@ footer {
 .footBottom { padding-top: 24px; font-size: 13px; letter-spacing: 2.4px; color: #d0d0d0; }
 
 /* ---------- WhatsApp flotante ---------- */
-/* Disco teal con aro blanco: el teal contrasta sobre fondos claros y el aro sobre los oscuros.
+/* Disco verde WhatsApp con el ícono oficial en blanco (3,36:1 con --wa-fab; el disco contra blanco
+   también da 3,36:1 y contra carbón 4,63:1). El aro blanco lo separa de los renders con mucho verde.
    site.js le pone .is-hidden mientras taparía un enlace o botón del contenido, o el footer;
    con el menú móvil abierto (.menu-open) sale de la vista y del orden de foco. */
 .wspFloat {
@@ -722,25 +757,25 @@ footer {
   place-items: center;
   width: 60px;
   height: 60px;
-  border: 2px solid rgba(255, 255, 255, 0.92);
+  border: 2px solid #fff;
   border-radius: 50%;
-  background: var(--teal);
+  background: var(--wa-fab);
   color: #fff;
-  box-shadow: 0 12px 28px -10px rgba(15, 82, 92, 0.6), 0 2px 8px rgba(36, 36, 36, 0.18);
+  box-shadow: 0 12px 28px -10px rgba(19, 108, 52, 0.6), 0 2px 8px rgba(36, 36, 36, 0.18);
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, background-color 0.25s, box-shadow 0.25s;
 }
-.wspFloat svg { width: 28px; height: 28px; }
+.wspFloat svg { width: 30px; height: 30px; }
 .wspFloat:hover {
-  background: #0b434b;
+  background: var(--wa-fab-hover);
   transform: translateY(-2px);
-  box-shadow: 0 16px 32px -10px rgba(15, 82, 92, 0.7), 0 3px 10px rgba(36, 36, 36, 0.2);
+  box-shadow: 0 16px 32px -10px rgba(19, 108, 52, 0.7), 0 3px 10px rgba(36, 36, 36, 0.2);
 }
 .wspFloat:active { transform: scale(0.96); }
 /* Foco en dos tonos: el aro blanco se ve sobre fondos oscuros y el contorno teal sobre los claros. */
 .wspFloat:focus-visible {
   outline: 2px solid var(--teal);
   outline-offset: 3px;
-  box-shadow: 0 0 0 3px #fff, 0 12px 28px -10px rgba(15, 82, 92, 0.6);
+  box-shadow: 0 0 0 3px #fff, 0 12px 28px -10px rgba(19, 108, 52, 0.6);
 }
 .wspFloat.is-hidden,
 .menu-open .wspFloat { opacity: 0; transform: translateY(12px) scale(0.9); pointer-events: none; }
@@ -917,8 +952,9 @@ footer {
   .wspNumber svg { width: 26px; height: 26px; }
   .wspBlock .btn { width: 100%; min-width: 0; }
   .salesGrid { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
-  .salesCard { padding: 30px 22px 26px; }
-  .salesCard > svg { width: 38px; height: 38px; margin-bottom: 20px; }
+  .salesMedia { aspect-ratio: 3 / 2; }
+  .salesMedia figcaption { left: 12px; bottom: 12px; font-size: 11.5px; }
+  .salesBody { padding: 26px 22px 26px; }
   .salesCard .title { font-size: 22px; }
   .salesCard address { padding: 16px 0; font-size: 16.5px; }
   .salesCard .actions { padding-top: 22px; }
@@ -942,7 +978,7 @@ footer {
     width: 56px;
     height: 56px;
   }
-  .wspFloat svg { width: 26px; height: 26px; }
+  .wspFloat svg { width: 28px; height: 28px; }
 
   .pageHero { height: 56vh; min-height: 380px; }
   .pageHero h1 { font-size: 30px; letter-spacing: 3px; }
