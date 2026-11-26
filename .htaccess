@@ -1,0 +1,63 @@
+# aravaconstrucciones.com · Hostinger (LiteSpeed / Apache). Sitio estático.
+# Solo usa ErrorDocument, mod_rewrite y mod_expires (envueltos en <IfModule>). Ver README.md.
+# No fuerza HTTPS en el dominio sin www: delante está el CDN de Hostinger y una regla
+# con %{HTTPS} puede entrar en bucle si el CDN habla con el servidor por HTTP.
+# Eso se activa en hPanel (SSL → Forzar HTTPS).
+
+# Página 404 propia. Se sirve en cualquier ruta que no exista (/a/b/c),
+# por eso 404.html usa rutas absolutas desde la raíz (/css/site.css, /assets/…).
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# Las reglas 1 y 3 toman la ruta de la petición original (THE_REQUEST), tal como llegó
+# (por eso NE: ya viene codificada). REQUEST_URI no sirve: si el servidor ya resolvió
+# /contacto como contacto.html, diría /contacto.html. La query se añade sola.
+
+# 1. www → https://aravaconstrucciones.com, con la misma ruta y query (301).
+RewriteCond %{HTTP_HOST} ^www\.aravaconstrucciones\.com$ [NC]
+RewriteCond %{THE_REQUEST} ^\S+\s+(?:https?://[^/\s]+)?(/[^?\s]*)
+RewriteRule ^ https://aravaconstrucciones.com%1 [R=301,L,NE]
+
+# 2. /index.html y /index → / (301), con la misma query.
+#    Mira la petición original (THE_REQUEST): el index.html que el servidor
+#    sirve por dentro para / no entra aquí, así que no hay bucle.
+RewriteCond %{THE_REQUEST} ^\S+\s+(?:https?://[^/\s]+)?/index(\.html)?[?\s]
+RewriteRule ^ https://%{HTTP_HOST}/ [R=301,L]
+
+# 3. /pagina/ → /pagina (301). Con la barra final, las rutas relativas de la página
+#    (css/site.css) apuntarían a /pagina/css/site.css y la página saldría sin estilos.
+#    Las carpetas reales (assets/, css/, js/) no se tocan. La primera línea evita un bucle:
+#    al servir 404.html por dentro, THE_REQUEST sigue siendo la petición original.
+RewriteCond %{REQUEST_URI} !^/404\.html$
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{THE_REQUEST} ^\S+\s+(?:https?://[^/\s]+)?(/[^?\s]*?)/+[?\s]
+RewriteRule ^ https://%{HTTP_HOST}%1 [R=301,L,NE]
+
+# 4. /pagina → pagina.html, por dentro y sin redirección: las URL públicas no llevan
+#    .html (como ya hacía el hosting). Solo nombres de un nivel (/contacto) y solo si
+#    existe el .html; el resto sigue su curso (archivo real o 404).
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([a-z0-9-]+)$ $1.html [L]
+</IfModule>
+
+# Caché de archivos estáticos (LiteSpeed / Apache). El HTML siempre revalida;
+# imágenes, fuentes y video se cachean 1 año; CSS y JS (sin hash) 1 mes.
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/html "access plus 0 seconds"
+ExpiresByType font/woff2 "access plus 1 year"
+ExpiresByType image/webp "access plus 1 year"
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/svg+xml "access plus 1 year"
+ExpiresByType video/mp4 "access plus 1 year"
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 month"
+ExpiresByType text/javascript "access plus 1 month"
+ExpiresByType application/x-javascript "access plus 1 month"
+</IfModule>
